@@ -10,6 +10,7 @@ import { Menu } from 'lucide-react'
 
 // React
 import React from 'react'
+import { ModalRegister } from './modal-register'
 
 export const UserMenu = () => {
   return (
@@ -27,7 +28,7 @@ export const UserMenu = () => {
     >
       <div className="w-full py-2 mt-2 rounded-xl -translate-x-10 bg-white border border-zinc-300 shadow-lg">
         <ul className="flex flex-col">
-          <ListItem asBold>Cadastrar-se</ListItem>
+          <ModalRegister />
           <ListItem>Entrar</ListItem>
           <div className="w-full h-px bg-zinc-200 my-2" />
           <ListItem>Anuncie seu espaço no airbnb</ListItem>

@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     container: {
       center: true,
@@ -17,7 +15,14 @@ module.exports = {
     },
     extend: {
       scale: {
-        input: '503px'
+        input: '31.438rem'
+      },
+      width: {
+        modal: '35.5rem',
+        field: '31.438rem'
+      },
+      height: {
+        modal: '28rem'
       },
       fontSize: {
         '2xs': '0.625rem'
@@ -32,5 +37,5 @@ module.exports = {
       }
     }
   },
-  plugins: [],
+  plugins: []
 }

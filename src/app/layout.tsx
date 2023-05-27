@@ -17,7 +17,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
     <html lang="pt-br" className={font.className}>
       <body className="w-full min-h-screen">
         <Header />
-        <main>{children}</main>
+        <main className='container mx-auto'>{children}</main>
       </body>
     </html>
   )

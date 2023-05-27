@@ -5,7 +5,7 @@ type Props = React.HtmlHTMLAttributes<HTMLLIElement> & {
   asBold?: boolean
 }
 
-export default function ListItem ({ children, asBold, ...rest }: Props) {
+export function ListItem ({ children, asBold, ...rest }: Props) {
   return (
     <li
     {...rest}
