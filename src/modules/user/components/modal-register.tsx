@@ -2,6 +2,7 @@
 
 // Components
 import { Button, InputField, ListItem, Modal } from '@/main/ui'
+import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
 // Utils
@@ -26,7 +27,7 @@ export const ModalRegister = () => {
         toggleOpenChange={setOpen}
       >
         <div className="absolute w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg">
-          <section className="flex w-full items-center px-4 pb-4 h-16 border-b border-zinc-300">
+          <section className="flex w-full items-center px-4 h-16 border-b border-zinc-300">
             <button
               onClick={closeModal}
               className="p-2 rounded-full hover:bg-neutral-100 active:bg-neutral-100"
@@ -35,7 +36,7 @@ export const ModalRegister = () => {
             </button>
             <h2 className="flex-1 text-center font-bold text-lg">Cadastrar-se</h2>
           </section>
-          <section className="px-4 mt-2 space-y-4">
+          <section className="p-8 space-y-4">
             <h1 className="text-2xl font-semibold">Bem-vindo ao Airbnb</h1>
             <form className="w-full flex flex-col items-center justify-center gap-4">
               <fieldset>
@@ -52,6 +53,7 @@ export const ModalRegister = () => {
               </p>
               <Button>Cadastrar-se</Button>
             </form>
+            <OauthOptions />
           </section>
         </div>
       </Modal>
