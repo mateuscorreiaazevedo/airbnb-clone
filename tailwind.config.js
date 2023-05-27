@@ -24,6 +24,9 @@ module.exports = {
       height: {
         modal: '28rem'
       },
+      minHeight: {
+        modal: '28rem'
+      },
       fontSize: {
         '2xs': '0.625rem'
       },
