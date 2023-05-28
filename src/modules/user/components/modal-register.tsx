@@ -9,14 +9,20 @@ import { X } from 'lucide-react'
 import { FormProvider, useForm } from 'react-hook-form'
 // React
 import React from 'react'
+import { setNotification } from '@/modules/core'
 
 export const ModalRegister = () => {
   const [open, setOpen] = React.useState(false)
-  const methods = useForm()
+  const methods = useForm<UserRegister>()
 
   const closeModal = () => {
     methods.reset()
     setOpen(false)
+  }
+
+  async function handleRegisterUser (data: UserRegister) {
+    console.log(data)
+    setNotification('hello')
   }
 
   return (
@@ -38,7 +44,10 @@ export const ModalRegister = () => {
           </section>
           <section className="p-8 space-y-4">
             <h1 className="text-2xl font-semibold">Bem-vindo ao Airbnb</h1>
-            <form className="w-full flex flex-col items-center justify-center gap-4">
+            <form
+              onSubmit={methods.handleSubmit(handleRegisterUser)}
+              className="w-full flex flex-col items-center justify-center gap-4"
+            >
               <fieldset>
                 <InputField label="Email" field="email" roundedTop />
                 <InputField label="Nome" field="name" />
