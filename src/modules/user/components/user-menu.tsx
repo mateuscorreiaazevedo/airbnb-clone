@@ -10,6 +10,7 @@ import React from 'react'
 // Components
 import { ListItem, Popover } from '@/main/ui'
 import Image from 'next/image'
+import { useUserMenu } from '../hooks/use-user-menu'
 
 const Register = React.lazy(() => import('./modal-register'))
 const Login = React.lazy(() => import('./modal-login'))
@@ -20,8 +21,12 @@ type Props = {
 }
 
 export const UserMenu = ({ isLogged }: Props) => {
+  const { open, setOpen } = useUserMenu()
+
   return (
     <Popover
+      open={open}
+      setOpen={setOpen}
       button={
         <div className="cursor-pointer p-2 border border-zinc-300 rounded-full h-11 flex items-center justify-center gap-2 hover:shadow-md transition-colors">
           <Menu className="w-4 h-4 text-zinc-800" />

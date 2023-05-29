@@ -5,7 +5,7 @@ type StoreProps = {
   setOpen: () => void
 }
 
-export const useLoginModal = create<StoreProps>(set => ({
+export const useRegisterModal = create<StoreProps>(set => ({
   open: false,
   setOpen: () => {
     set(state => ({ open: !state.open }))

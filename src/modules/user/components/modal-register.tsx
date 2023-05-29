@@ -6,13 +6,15 @@ import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
 // Utils
+import { useRegisterModal } from '../hooks/use-register-modal'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useUserMenu } from '../hooks/use-user-menu'
 import { setNotification } from '@/modules/core'
-import { useRouter } from 'next/navigation'
 // Service
 import { userService } from '../service/user-service'
 // React
 import React from 'react'
+import { useLoginModal } from '../hooks/use-login-modal'
 
 type Props = {
   button?: React.JSX.Element
@@ -20,13 +22,20 @@ type Props = {
 
 export default function ModalRegister ({ button }: Props) {
   const [loading, setLoading] = React.useState(false)
-  const [open, setOpen] = React.useState(false)
+  const { setOpen: closePopover } = useUserMenu()
+  const { setOpen: setLogin } = useLoginModal()
+  const { open, setOpen } = useRegisterModal()
   const methods = useForm<UserRegister>()
-  const { refresh } = useRouter()
 
   const closeModal = () => {
     methods.reset()
-    setOpen(false)
+    closePopover()
+    setOpen()
+  }
+
+  const navigateToLoginModal = () => {
+    setLogin()
+    setOpen()
   }
 
   async function handleRegisterUser ({ email, name, password, confirmPassword }: UserRegister) {
@@ -39,8 +48,7 @@ export default function ModalRegister ({ button }: Props) {
         password
       })
       setNotification(response, 'success')
-      refresh()
-      closeModal()
+      navigateToLoginModal()
     } catch (error) {
       setNotification((error as any).message, 'error')
     } finally {
@@ -92,6 +100,15 @@ export default function ModalRegister ({ button }: Props) {
               <Button disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</Button>
             </form>
             <OauthOptions />
+            <p className='text-sm text-center'>
+              Já possui uma conta?{' '}
+              <button
+                className='text-rose-500 font-bold'
+                onClick={navigateToLoginModal}
+              >
+                Faça login
+              </button>
+            </p>
           </section>
         </div>
       </Modal>

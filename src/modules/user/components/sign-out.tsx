@@ -1,15 +1,20 @@
 'use client'
 
+// Components
 import { ListItem } from '@/main/ui'
-import { signOut } from 'next-auth/react'
+
+// Utils
 import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
+
+// React
 import React from 'react'
 
 const SignOut = () => {
   const { refresh } = useRouter()
 
   function handleSignOut () {
-    signOut({ redirect: false })
+    signOut()
     refresh()
   }
 

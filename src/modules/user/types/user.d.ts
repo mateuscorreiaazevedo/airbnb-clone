@@ -5,7 +5,7 @@ interface UserRegister {
   confirmPassword: string
 }
 
-interface userLogin {
+interface UserLogin {
   email: string
   password: string
 }

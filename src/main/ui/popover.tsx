@@ -7,11 +7,13 @@ import React from 'react'
 type Props = {
   button: React.JSX.Element
   children: React.ReactNode
+  open: boolean
+  setOpen: () => void
 }
 
-export default function PopoverUi ({ button, children }:Props) {
+export default function PopoverUi ({ button, children, open, setOpen }:Props) {
   return (
-    <Popover.Root>
+    <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         {button}
       </Popover.Trigger>

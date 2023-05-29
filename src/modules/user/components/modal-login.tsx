@@ -6,11 +6,14 @@ import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
 // Utils
+import { useRegisterModal } from '../hooks/use-register-modal'
+import { useLoginModal } from '../hooks/use-login-modal'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useUserMenu } from '../hooks/use-user-menu'
 import { setNotification } from '@/modules/core'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 // React
-import { useRouter } from 'next/navigation'
 import React from 'react'
 
 type Props = {
@@ -18,19 +21,21 @@ type Props = {
 }
 
 export default function ModalLogin ({ button }: Props) {
-  const [open, setOpen] = React.useState(false)
+  const { setOpen: openRegister } = useRegisterModal()
   const [loading, setLoading] = React.useState(false)
-
-  const methods = useForm<userLogin>()
+  const { setOpen: closePopover } = useUserMenu()
+  const { setOpen, open } = useLoginModal()
+  const methods = useForm<UserLogin>()
   const { refresh } = useRouter()
 
   const closeModal = () => {
     methods.reset()
-    setOpen(false)
+    setOpen()
     refresh()
+    closePopover()
   }
 
-  async function handleLoginUser ({ email, password }: userLogin) {
+  async function handleLoginUser ({ email, password }: UserLogin) {
     setLoading(true)
     const res = await signIn('credentials', {
       email,
@@ -87,6 +92,18 @@ export default function ModalLogin ({ button }: Props) {
               </Button>
             </form>
             <OauthOptions />
+            <p className='text-sm text-center'>
+              Ainda não possui uma conta?{' '}
+              <button
+                className='text-rose-500 font-bold'
+                onClick={() => {
+                  openRegister()
+                  setOpen()
+                }}
+              >
+                Registre-se
+              </button>
+            </p>
           </section>
         </div>
       </Modal>
