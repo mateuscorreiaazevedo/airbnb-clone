@@ -22,7 +22,7 @@ export const UserMenu = () => {
           <Image
             src={images.avatarPlaceholder}
             alt=""
-            className="w-[30px] aspect-square rounded-full"
+            className="w-[30px] aspect-square rounded-full border border-zinc-300"
           />
         </div>
       }
