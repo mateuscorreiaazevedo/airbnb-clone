@@ -1,19 +1,25 @@
 'use client'
 
-// Components
-import { ListItem, Popover } from '@/main/ui'
-import Image from 'next/image'
-
 // Contents
 import { images } from '@/assets/images'
 import { Menu } from 'lucide-react'
 
 // React
 import React from 'react'
-import { ModalRegister } from './modal-register'
-import { ModalLogin } from './modal-login'
 
-export const UserMenu = () => {
+// Components
+import { ListItem, Popover } from '@/main/ui'
+import Image from 'next/image'
+
+const Register = React.lazy(() => import('./modal-register'))
+const Login = React.lazy(() => import('./modal-login'))
+const SignOut = React.lazy(() => import('./sign-out'))
+
+type Props = {
+  isLogged?: boolean
+}
+
+export const UserMenu = ({ isLogged }: Props) => {
   return (
     <Popover
       button={
@@ -29,8 +35,16 @@ export const UserMenu = () => {
     >
       <div className="w-full py-2 mt-2 rounded-xl -translate-x-10 bg-white border border-zinc-300 shadow-lg">
         <ul className="flex flex-col">
-          <ModalRegister />
-          <ModalLogin />
+          {isLogged
+            ? (
+            <SignOut />
+              )
+            : (
+            <>
+              <Register />
+              <Login />
+            </>
+              )}
           <div className="w-full h-px bg-zinc-200 my-2" />
           <ListItem>Anuncie seu espaço no airbnb</ListItem>
           <ListItem>Ajuda</ListItem>

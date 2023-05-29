@@ -8,7 +8,7 @@ export async function POST (req: Request) {
 
   const bodySchema = z.object({
     email: z.string(),
-    password: z.string(),
+    password: z.string()
   })
 
   const { email, password } = bodySchema.parse(body)
@@ -24,12 +24,6 @@ export async function POST (req: Request) {
   }
   if (!password.length) {
     return NextResponse.json({ error: 'Insira uma senha.' }, { status: 422 })
-  }
-  if (password.length < 8) {
-    return NextResponse.json(
-      { error: 'A senha deve conter no mínimo 8 caracteres.' },
-      { status: 422 }
-    )
   }
   // End - Validations
 
@@ -52,8 +46,6 @@ export async function POST (req: Request) {
   const { password: _, ...rest } = user
 
   return NextResponse.json({
-    user: {
-      ...rest
-    }
+    data: rest
   })
 }

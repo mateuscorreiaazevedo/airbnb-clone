@@ -18,7 +18,7 @@ type Props = {
   button?: React.JSX.Element
 }
 
-export const ModalRegister: React.FC<Props> = ({ button }) => {
+export default function ModalRegister ({ button }: Props) {
   const [loading, setLoading] = React.useState(false)
   const [open, setOpen] = React.useState(false)
   const methods = useForm<UserRegister>()

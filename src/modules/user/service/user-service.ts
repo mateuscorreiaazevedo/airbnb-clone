@@ -26,6 +26,30 @@ class UserService {
         throw new Error('Erro no servidor.')
     }
   }
+
+  async login ({ email, password }: userLogin) {
+    const response = await service.request<{ user: UserInfo; error?: string }>({
+      url: '/login',
+      data: {
+        email,
+        password,
+      },
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'post'
+    })
+
+    switch (response.statusCode) {
+      case 201:
+        return response.body
+      case 404:
+        throw new Error(response.body.error)
+      case 422:
+        throw new Error(response.body.error)
+    }
+  }
 }
 
 export const userService = new UserService()
