@@ -7,28 +7,51 @@ import { OauthOptions } from './oauth-options'
 import { X } from 'lucide-react'
 // Utils
 import { FormProvider, useForm } from 'react-hook-form'
+import { setNotification } from '@/modules/core'
+import { useRouter } from 'next/navigation'
+// Service
+import { userService } from '../service/user-service'
 // React
 import React from 'react'
-import { setNotification } from '@/modules/core'
 
-export const ModalRegister = () => {
+type Props = {
+  button?: React.JSX.Element
+}
+
+export const ModalRegister: React.FC<Props> = ({ button }) => {
+  const [loading, setLoading] = React.useState(false)
   const [open, setOpen] = React.useState(false)
   const methods = useForm<UserRegister>()
+  const { refresh } = useRouter()
 
   const closeModal = () => {
     methods.reset()
     setOpen(false)
   }
 
-  async function handleRegisterUser (data: UserRegister) {
-    console.log(data)
-    setNotification('hello')
+  async function handleRegisterUser ({ email, name, password, confirmPassword }: UserRegister) {
+    setLoading(true)
+    try {
+      const response = await userService.register({
+        confirmPassword,
+        email,
+        name,
+        password
+      })
+      setNotification(response, 'success')
+      refresh()
+      closeModal()
+    } catch (error) {
+      setNotification((error as any).message, 'error')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <FormProvider {...methods}>
       <Modal
-        button={<ListItem asBold>Cadastrar-se</ListItem>}
+        button={button || <ListItem asBold>Cadastrar-se</ListItem>}
         isOpen={open}
         toggleOpenChange={setOpen}
       >
@@ -51,7 +74,13 @@ export const ModalRegister = () => {
               <fieldset>
                 <InputField label="Email" field="email" roundedTop />
                 <InputField label="Nome" field="name" />
-                <InputField label="Senha" field="password" roundedBotton hasPassword />
+                <InputField label="Senha" field="password" hasPassword />
+                <InputField
+                  label="Confirmar senha"
+                  field="confirmPassword"
+                  roundedBotton
+                  hasPassword
+                />
               </fieldset>
               <p className="text-zinc-400 text-xs w-field">
                 Ligaremos ou enviaremos uma mensagem para confirmar seu número. Podem ser
@@ -60,7 +89,7 @@ export const ModalRegister = () => {
                   Política de Privacidade
                 </a>
               </p>
-              <Button>Cadastrar-se</Button>
+              <Button disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</Button>
             </form>
             <OauthOptions />
           </section>

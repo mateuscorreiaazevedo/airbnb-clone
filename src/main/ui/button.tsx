@@ -1,6 +1,6 @@
 import React from 'react'
 
-type Props = React.HtmlHTMLAttributes<HTMLButtonElement> & {
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
   type?: 'button' | 'reset' | 'submit'
   styles?: 'outline' | 'default'
@@ -23,7 +23,7 @@ export const Button: React.FC<Props> = ({ children, type, styles = 'default', ..
     <button
       type={type}
       {...rest}
-      className="flex items-center justify-center active:bg-gradient-to-r transition-colors w-field h-12 rounded-lg bg-gradient-to-l text-white font-bold to-rose-500 from-pink-500"
+      className="flex items-center justify-center active:bg-gradient-to-r transition-colors w-field h-12 rounded-lg bg-gradient-to-l text-white font-bold to-rose-500 from-pink-500 disabled:bg-zinc-500"
     >
       {children}
     </button>

@@ -2,32 +2,39 @@
 
 // Components
 import { Button, InputField, ListItem, Modal } from '@/main/ui'
+import { ModalRegister } from './modal-register'
 import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
 // Utils
 import { FormProvider, useForm } from 'react-hook-form'
-// React
-import React from 'react'
 import { setNotification } from '@/modules/core'
+// React
+import { useRouter } from 'next/navigation'
+import React from 'react'
 
-export const ModalLogin = () => {
+type Props = {
+  button?: React.JSX.Element
+}
+
+export const ModalLogin: React.FC<Props> = ({ button }) => {
   const [open, setOpen] = React.useState(false)
   const methods = useForm<userLogin>()
+  const { refresh } = useRouter()
 
   const closeModal = () => {
     methods.reset()
     setOpen(false)
   }
 
-  async function handleLoginUser (data: userLogin) {
-    console.log(data)
+  async function handleLoginUser (_data: userLogin) {
     setNotification('Hello')
+    refresh()
   }
 
   return (
     <FormProvider {...methods}>
-      <Modal button={<ListItem>Entrar</ListItem>} isOpen={open} toggleOpenChange={setOpen}>
+      <Modal button={button || <ListItem>Entrar</ListItem>} isOpen={open} toggleOpenChange={setOpen}>
         <div className="absolute w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg">
           <section className="flex w-full items-center px-4 h-16 border-b border-zinc-300">
             <button
@@ -58,6 +65,9 @@ export const ModalLogin = () => {
               <Button type="submit">Continuar</Button>
             </form>
             <OauthOptions />
+            <p className='text-sm text-center'>
+              Ainda não é cadastrado? <ModalRegister button={<button className='text-rose-500 font-bold'>Registre-se</button>} />
+            </p>
           </section>
         </div>
       </Modal>

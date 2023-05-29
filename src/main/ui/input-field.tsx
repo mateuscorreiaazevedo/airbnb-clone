@@ -2,6 +2,7 @@
 import { useFormContext } from 'react-hook-form'
 // React
 import React from 'react'
+import { Eye, EyeOff } from 'lucide-react'
 
 type Props = React.HtmlHTMLAttributes<HTMLInputElement> & {
   field: string
@@ -22,6 +23,7 @@ export function InputField (props: Props) {
     hasPassword,
     ...rest
   } = props
+  const [viewPassword, setViewPassword] = React.useState(hasPassword)
 
   const { register } = useFormContext()
 
@@ -29,7 +31,7 @@ export function InputField (props: Props) {
     <div className="relative w-fit h-fit">
       <input
         id={field}
-        type={hasPassword ? 'password' : 'text'}
+        type={viewPassword ? 'password' : 'text'}
         {...register(field)}
         {...rest}
         placeholder=" "
@@ -59,7 +61,8 @@ export function InputField (props: Props) {
           absolute
           cursor-pointer
           transition-all
-          peer-placeholder-shown/input:top-3
+          peer-placeholder-shown/input:top-1/2
+          peer-placeholder-shown/input:-translate-y-1/2
           peer-placeholder-shown/input:left-5
           peer-placeholder-shown/input:font-semibold
           peer-placeholder-shown/input:text-lg
@@ -76,6 +79,16 @@ export function InputField (props: Props) {
       >
         {label}
       </label>
+      {hasPassword && (
+        <label
+          htmlFor={field}
+          onClick={() => setViewPassword(prev => !prev)}
+          className="absolute z-10 right-4 top-1/2 cursor-pointer -translate-y-1/2 text-zinc-500"
+          title={viewPassword ? 'Ocultar senha' : 'Mostrar senha'}
+        >
+          {viewPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+        </label>
+      )}
     </div>
   )
 }
