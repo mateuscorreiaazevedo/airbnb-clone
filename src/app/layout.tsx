@@ -5,6 +5,7 @@ import { Header } from '@/components/header'
 import { Nunito } from 'next/font/google'
 import '../assets/styles/globals.css'
 import { Toaster } from 'react-hot-toast'
+import { AuthProvider } from '@/modules/core'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -17,16 +18,19 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
   return (
     <html lang="pt-br" className={font.className}>
       <body className="w-full min-h-screen">
-        <Header />
-        <main className="container mx-auto">
-          <Toaster
-            toastOptions={{
-              position: 'top-center',
-              className: 'font-bold px-4 py-2'
-            }}
-          />
-          {children}
-        </main>
+        <AuthProvider>
+          {/* @ts-expect-error Server Components */}
+          <Header />
+          <main className="container mx-auto">
+            <Toaster
+              toastOptions={{
+                position: 'top-center',
+                className: 'font-bold px-4 py-2'
+              }}
+            />
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   )
