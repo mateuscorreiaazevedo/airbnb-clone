@@ -80,13 +80,14 @@ export function InputField (props: Props) {
         {label}
       </label>
       {hasPassword && (
-        <span
+        <label
+          htmlFor={field}
           onClick={() => setViewPassword(prev => !prev)}
           className="absolute z-10 right-4 top-1/2 cursor-pointer -translate-y-1/2 text-zinc-500"
           title={viewPassword ? 'Ocultar senha' : 'Mostrar senha'}
         >
           {viewPassword ? <Eye size={20} /> : <EyeOff size={20} />}
-        </span>
+        </label>
       )}
     </div>
   )

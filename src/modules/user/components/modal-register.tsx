@@ -7,12 +7,12 @@ import { OauthOptions } from './oauth-options'
 import { X } from 'lucide-react'
 // Utils
 import { FormProvider, useForm } from 'react-hook-form'
+import { setNotification } from '@/modules/core'
+import { useRouter } from 'next/navigation'
+// Service
+import { userService } from '../service/user-service'
 // React
 import React from 'react'
-import { setNotification } from '@/modules/core'
-import { ModalLogin } from './modal-login'
-import { userService } from '../service/user-service'
-import { useRouter } from 'next/navigation'
 
 type Props = {
   button?: React.JSX.Element
@@ -92,12 +92,6 @@ export const ModalRegister: React.FC<Props> = ({ button }) => {
               <Button disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</Button>
             </form>
             <OauthOptions />
-            <p className="text-sm text-center">
-              Já possui uma conta?{' '}
-              <ModalLogin
-                button={<button className="text-rose-500 font-bold">Fazer login</button>}
-              />
-            </p>
           </section>
         </div>
       </Modal>

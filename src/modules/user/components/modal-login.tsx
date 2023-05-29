@@ -27,7 +27,7 @@ export const ModalLogin: React.FC<Props> = ({ button }) => {
     setOpen(false)
   }
 
-  async function handleLoginUser (data: userLogin) {
+  async function handleLoginUser (_data: userLogin) {
     setNotification('Hello')
     refresh()
   }
