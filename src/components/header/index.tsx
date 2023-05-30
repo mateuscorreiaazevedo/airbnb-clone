@@ -4,18 +4,18 @@ import { UserMenu } from '@/modules/user'
 import Image from 'next/image'
 import Link from 'next/link'
 
+// Utils
+import { getLoggedUser } from '@/app/actions/get-logged-user'
+
 // Contents
 import { images } from '@/assets/images'
 
 import React from 'react'
 
 // Next-Auth
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../pages/api/auth/[...nextauth]'
 
 export const Header = async () => {
-  const session = await getServerSession(authOptions)
-
+  const loggedUser = await getLoggedUser()
   return (
     <header className="sticky top-0 w-full h-20 flex items-center border-b border-b-zinc-100">
       <nav className="container mx-auto flex items-center justify-between">
@@ -30,7 +30,7 @@ export const Header = async () => {
           >
             Anuncie seu espaço no Airbnb
           </Link>
-           <UserMenu isLogged={!!session?.user} />
+           <UserMenu isLogged={!!loggedUser} />
         </div>
       </nav>
     </header>
