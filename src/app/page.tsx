@@ -1,7 +1,13 @@
+import { Categories } from '@/modules/filters'
 import React from 'react'
 
 export default function Home () {
   return (
-    <div>Home</div>
+    <>
+      <Categories />
+      <article className='container mt-2'>
+        Home
+      </article>
+    </>
   )
 }

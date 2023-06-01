@@ -21,7 +21,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
         <AuthProvider>
           {/* @ts-expect-error Server Components */}
           <Header />
-          <main className="container mx-auto">
+          <main className="w-full h-full">
             <Toaster
               toastOptions={{
                 position: 'top-center',

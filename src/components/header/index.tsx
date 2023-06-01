@@ -18,7 +18,7 @@ export const Header = async () => {
   const userAuth = await getLoggedUser()
   return (
     <header className="sticky top-0 w-full h-20 flex items-center border-b border-b-zinc-100">
-      <nav className="container mx-auto flex items-center justify-between">
+      <div className="container mx-auto flex items-center justify-between">
         <Link href="/">
           <Image src={images.airbnbLogo} alt="" className="h-8 w-[102px] mr-40" />
         </Link>
@@ -32,7 +32,7 @@ export const Header = async () => {
           </Link>
            <UserMenu userAuth={userAuth} />
         </div>
-      </nav>
+      </div>
     </header>
   )
 }

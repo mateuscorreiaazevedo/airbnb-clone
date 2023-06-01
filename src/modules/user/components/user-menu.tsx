@@ -39,7 +39,7 @@ export const UserMenu = ({ userAuth }: Props) => {
         </div>
       }
     >
-      <div className="w-full py-2 mt-2 rounded-xl -translate-x-10 bg-white border border-zinc-300 shadow-lg">
+      <nav className="w-full py-2 mt-2 rounded-xl -translate-x-10 bg-white border border-zinc-300 shadow-lg">
         <ul className="flex flex-col">
           {userAuth
             ? (
@@ -61,7 +61,7 @@ export const UserMenu = ({ userAuth }: Props) => {
           <ListItem>Anuncie seu espaço no airbnb</ListItem>
           <ListItem>Ajuda</ListItem>
         </ul>
-      </div>
+      </nav>
     </Popover>
   )
 }
