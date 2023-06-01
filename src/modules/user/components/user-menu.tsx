@@ -8,19 +8,18 @@ import { Menu } from 'lucide-react'
 import React from 'react'
 
 // Components
+import { Login, Register, SignOut } from '@/modules/auth'
 import { ListItem, Popover } from '@/main/ui'
 import Image from 'next/image'
+
+// Utils
 import { useUserMenu } from '../hooks/use-user-menu'
 
-const Register = React.lazy(() => import('./modal-register'))
-const Login = React.lazy(() => import('./modal-login'))
-const SignOut = React.lazy(() => import('./sign-out'))
-
 type Props = {
-  isLogged?: boolean
+  userAuth?: UserInfo | null
 }
 
-export const UserMenu = ({ isLogged }: Props) => {
+export const UserMenu = ({ userAuth }: Props) => {
   const { open, setOpen } = useUserMenu()
 
   return (
@@ -31,18 +30,26 @@ export const UserMenu = ({ isLogged }: Props) => {
         <div className="cursor-pointer p-2 border border-zinc-300 rounded-full h-11 flex items-center justify-center gap-2 hover:shadow-md transition-colors">
           <Menu className="w-4 h-4 text-zinc-800" />
           <Image
-            src={images.avatarPlaceholder}
+            src={userAuth?.image ?? images.avatarPlaceholder}
             alt=""
             className="w-[30px] aspect-square rounded-full border border-zinc-300"
+            width={30}
+            height={30}
           />
         </div>
       }
     >
       <div className="w-full py-2 mt-2 rounded-xl -translate-x-10 bg-white border border-zinc-300 shadow-lg">
         <ul className="flex flex-col">
-          {isLogged
+          {userAuth
             ? (
-            <SignOut />
+            <>
+              <ListItem>Minhas propriedades</ListItem>
+              <ListItem>Minhas Reservas</ListItem>
+              <ListItem>Minhas viagens</ListItem>
+              <ListItem>Meus favoritos</ListItem>
+              <SignOut />
+            </>
               )
             : (
             <>

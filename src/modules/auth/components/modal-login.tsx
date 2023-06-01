@@ -7,51 +7,48 @@ import { OauthOptions } from './oauth-options'
 import { X } from 'lucide-react'
 // Utils
 import { useRegisterModal } from '../hooks/use-register-modal'
+import { useLoginModal } from '../hooks/use-login-modal'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useUserMenu } from '../hooks/use-user-menu'
+import { useUserMenu } from '../../user/hooks/use-user-menu'
 import { setNotification } from '@/modules/core'
-// Service
-import { userService } from '../service/user-service'
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 // React
 import React from 'react'
-import { useLoginModal } from '../hooks/use-login-modal'
 
 type Props = {
   button?: React.JSX.Element
 }
 
-export default function ModalRegister ({ button }: Props) {
+export default function ModalLogin ({ button }: Props) {
+  const { setOpen: openRegister } = useRegisterModal()
   const [loading, setLoading] = React.useState(false)
   const { setOpen: closePopover } = useUserMenu()
-  const { setOpen: setLogin } = useLoginModal()
-  const { open, setOpen } = useRegisterModal()
-  const methods = useForm<UserRegister>()
+  const { setOpen, open } = useLoginModal()
+  const methods = useForm<UserLogin>()
+  const { refresh } = useRouter()
 
   const closeModal = () => {
     methods.reset()
+    setOpen()
+    refresh()
     closePopover()
-    setOpen()
   }
 
-  const navigateToLoginModal = () => {
-    setLogin()
-    setOpen()
-  }
-
-  async function handleRegisterUser ({ email, name, password, confirmPassword }: UserRegister) {
+  async function handleLoginUser ({ email, password }: UserLogin) {
     setLoading(true)
-    try {
-      const response = await userService.register({
-        confirmPassword,
-        email,
-        name,
-        password
-      })
-      setNotification(response, 'success')
-      navigateToLoginModal()
-    } catch (error) {
-      setNotification((error as any).message, 'error')
-    } finally {
+    const res = await signIn('credentials', {
+      email,
+      password,
+      redirect: false
+    })
+
+    if (res?.ok) {
+      setNotification('Bem-vindo!', 'success')
+      closeModal()
+      setLoading(false)
+    } else if (res?.error) {
+      setNotification(res.error, 'error')
       setLoading(false)
     }
   }
@@ -59,7 +56,7 @@ export default function ModalRegister ({ button }: Props) {
   return (
     <FormProvider {...methods}>
       <Modal
-        button={button || <ListItem asBold>Cadastrar-se</ListItem>}
+        button={button || <ListItem>Entrar</ListItem>}
         isOpen={open}
         toggleOpenChange={setOpen}
       >
@@ -71,24 +68,17 @@ export default function ModalRegister ({ button }: Props) {
             >
               <X className="w-5 h-5" />
             </button>
-            <h2 className="flex-1 text-center font-bold text-lg">Cadastrar-se</h2>
+            <h2 className="flex-1 text-center font-bold text-lg">Entrar</h2>
           </section>
           <section className="p-8 space-y-4">
-            <h1 className="text-2xl font-semibold">Bem-vindo ao Airbnb</h1>
+            <h1 className="text-2xl font-semibold">Bem-vindo de volta</h1>
             <form
-              onSubmit={methods.handleSubmit(handleRegisterUser)}
+              onSubmit={methods.handleSubmit(handleLoginUser)}
               className="w-full flex flex-col items-center justify-center gap-4"
             >
               <fieldset>
                 <InputField label="Email" field="email" roundedTop />
-                <InputField label="Nome" field="name" />
-                <InputField label="Senha" field="password" hasPassword />
-                <InputField
-                  label="Confirmar senha"
-                  field="confirmPassword"
-                  roundedBotton
-                  hasPassword
-                />
+                <InputField label="Senha" field="password" roundedBotton hasPassword />
               </fieldset>
               <p className="text-zinc-400 text-xs w-field">
                 Ligaremos ou enviaremos uma mensagem para confirmar seu número. Podem ser
@@ -97,16 +87,21 @@ export default function ModalRegister ({ button }: Props) {
                   Política de Privacidade
                 </a>
               </p>
-              <Button disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</Button>
+              <Button disabled={loading} type="submit">
+                {loading ? 'Aguarde...' : 'Continuar'}
+              </Button>
             </form>
             <OauthOptions />
             <p className='text-sm text-center'>
-              Já possui uma conta?{' '}
+              Ainda não possui uma conta?{' '}
               <button
                 className='text-rose-500 font-bold'
-                onClick={navigateToLoginModal}
+                onClick={() => {
+                  openRegister()
+                  setOpen()
+                }}
               >
-                Faça login
+                Registre-se
               </button>
             </p>
           </section>

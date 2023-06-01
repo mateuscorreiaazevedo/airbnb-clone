@@ -15,7 +15,7 @@ import React from 'react'
 // Next-Auth
 
 export const Header = async () => {
-  const loggedUser = await getLoggedUser()
+  const userAuth = await getLoggedUser()
   return (
     <header className="sticky top-0 w-full h-20 flex items-center border-b border-b-zinc-100">
       <nav className="container mx-auto flex items-center justify-between">
@@ -30,7 +30,7 @@ export const Header = async () => {
           >
             Anuncie seu espaço no Airbnb
           </Link>
-           <UserMenu isLogged={!!loggedUser} />
+           <UserMenu userAuth={userAuth} />
         </div>
       </nav>
     </header>

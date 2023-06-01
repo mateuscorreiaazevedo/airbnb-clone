@@ -1,14 +1,3 @@
-interface UserRegister {
-  name: string
-  email: string
-  password: string
-  confirmPassword: string
-}
-
-interface UserLogin {
-  email: string
-  password: string
-}
 
 interface UserInfo {
   id: string
@@ -16,7 +5,7 @@ interface UserInfo {
   email: string | null
   emailVerified: Date | string | null
   image: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
+  createdAt: string | string
+  updatedAt: string | string
   favoriteIds: string[]
 }

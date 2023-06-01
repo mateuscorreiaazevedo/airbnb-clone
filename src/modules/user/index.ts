@@ -1,3 +1,3 @@
 export * from './components/user-menu'
-export * from './service/user-service'
+export * from '../auth/service/auth-service'
 export * from './hooks/use-user-menu'

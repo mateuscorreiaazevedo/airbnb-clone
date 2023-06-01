@@ -1,7 +1,6 @@
 
 // Providers
 import Credentials from 'next-auth/providers/credentials'
-import Github from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 
 // Prisma
@@ -17,10 +16,6 @@ import { compare } from 'bcrypt'
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prismaDb!),
   providers: [
-    Github({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!
-    }),
     Google({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!

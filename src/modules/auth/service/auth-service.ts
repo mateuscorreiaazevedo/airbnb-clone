@@ -1,6 +1,6 @@
 import { service } from '@/modules/core'
 
-class UserService {
+class AuthService {
   async register ({ email, name, password, confirmPassword }: UserRegister) {
     const response = await service.request<{ message: string; error?: string }>({
       url: '/register',
@@ -28,4 +28,4 @@ class UserService {
   }
 }
 
-export const userService = new UserService()
+export const authService = new AuthService()
