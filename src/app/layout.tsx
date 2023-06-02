@@ -1,9 +1,12 @@
 // Components
+import { Categories as CategoriesNavbar } from '@/modules/filters'
 import { Header } from '@/components/header'
 
 // Styles & Fonts
 import { Nunito } from 'next/font/google'
 import '../assets/styles/globals.css'
+
+// Utils
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from '@/modules/core'
 
@@ -21,7 +24,8 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
         <AuthProvider>
           {/* @ts-expect-error Server Components */}
           <Header />
-          <main className="w-full h-full">
+          <CategoriesNavbar />
+          <main className="w-full h-full container">
             <Toaster
               toastOptions={{
                 position: 'top-center',

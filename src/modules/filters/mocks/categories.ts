@@ -8,6 +8,7 @@ import {
   Hotel,
   MountainSnow,
   Palmtree,
+  Rocket,
   Ship,
   Snowflake,
   Tent,
@@ -100,5 +101,11 @@ export const categoriesMocks: CategoriesInterface[] = [
     label: 'Espaços adaptados',
     icon: Accessibility,
     description: 'In aliquip magna et nulla dolor ut est ullamco cillum in.'
+  },
+  {
+    id: 14,
+    label: 'Uau!',
+    icon: Rocket,
+    description: 'Ut irure consectetur ullamco consectetur incididunt incididunt enim in aute sit amet ipsum exercitation.'
   }
 ]
