@@ -11,11 +11,11 @@ import { signOut } from 'next-auth/react'
 import React from 'react'
 
 const SignOut = () => {
-  const { refresh } = useRouter()
+  const { push } = useRouter()
 
   function handleSignOut () {
     signOut()
-    refresh()
+    push('/')
   }
 
   return (

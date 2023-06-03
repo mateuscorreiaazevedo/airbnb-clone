@@ -11,16 +11,16 @@ import React from 'react'
 import { CategoriesInterface } from '../types/filter-categories'
 
 export const CategoryItem = (props: CategoriesInterface) => {
-  const searchParams = useSearchParams()
-  const categoryId = useSetCategoryId(props.id.toString(), searchParams)
+  const params = useSearchParams()
+  const categoryId = useSetCategoryId(props.id.toString(), params)
   const pathname = usePathname()
   const { push } = useRouter()
 
-  const hasCategoryId = searchParams?.has('category_id')
+  const hasCategoryId = params?.has('category_id')
 
   const [activeCategory, setActiveCategory] = React.useState(() => {
     if (hasCategoryId) {
-      return searchParams?.get('category_id') as string
+      return params?.get('category_id') as string
     } else {
       return '1'
     }
@@ -32,11 +32,11 @@ export const CategoryItem = (props: CategoriesInterface) => {
 
   React.useEffect(() => {
     if (hasCategoryId) {
-      setActiveCategory(searchParams?.get('category_id') as string)
+      setActiveCategory(params?.get('category_id') as string)
     } else {
       setActiveCategory('1')
     }
-  }, [searchParams])
+  }, [params])
 
   return (
     <button
@@ -44,8 +44,7 @@ export const CategoryItem = (props: CategoriesInterface) => {
       onClick={handleSetCategory}
       className={`
         keen-slider__slide
-        py-2.5
-        px-3
+        p-2.5
         flex
         flex-col
         items-center
@@ -53,12 +52,13 @@ export const CategoryItem = (props: CategoriesInterface) => {
         hover:text-black
         transition-colors
         border-b-2
+        max-h-16
         ${activeCategory !== props.id.toString() ? 'hover:border-zinc-300' : ''}
         ${activeCategory === props.id.toString() ? 'text-black' : 'text-zinc-300'}
         ${activeCategory === props.id.toString() ? 'border-black' : 'border-transparent'}
         `}
     >
-      <props.icon className="w-6 h-6 flex-1" />
+      <props.icon size={24} />
       <p className="text-xs font-light truncate">{props.label}</p>
     </button>
   )
