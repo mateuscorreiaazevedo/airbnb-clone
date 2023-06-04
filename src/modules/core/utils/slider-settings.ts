@@ -81,5 +81,5 @@ export const settings: Settings = {
   infinite: false,
   speed: 500,
   arrows: false,
-  draggable: false
+  draggable: false,
 }
