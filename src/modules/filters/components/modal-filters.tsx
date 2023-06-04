@@ -13,7 +13,7 @@ const ModalFilters = () => {
   return (
     <Modal
       button={
-        <button className="text-zinc-950 text-sm flex items-center bg-white gap-2 border border-zinc-300 px-4 py-2 rounded-md">
+        <button className="hidden md:flex text-zinc-950 text-sm items-center bg-white gap-2 border border-zinc-300 px-4 py-2 rounded-md">
           <SlidersHorizontal size={12} /> Filtros
         </button>
       }

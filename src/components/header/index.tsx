@@ -19,9 +19,9 @@ export const Header = async () => {
   return (
     <header className="sticky top-0 w-full h-20 flex items-center border-b border-b-zinc-100">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className='lg:mr-40'>
+        <a href="/" className='lg:mr-40'>
           <Image src={images.airbnbLogo} alt="" className="h-8 w-[102px]" />
-        </Link>
+        </a>
         <SearchBar />
         <div className="flex gap-8">
           <Link

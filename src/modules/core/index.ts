@@ -1,4 +1,6 @@
+export * from './components/arrow-slider'
 export * from './utils/set-notification'
 export * from './contexts/auth-provider'
 export * from './components/search-bar'
+export * from './utils/slider-settings'
 export * from './service/service'
