@@ -11,7 +11,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useUserMenu } from '../../user/hooks/use-user-menu'
 import { setNotification } from '@/modules/core'
 // Service
-import { userService } from '../service/auth-service'
+import { authService } from '../service/auth-service'
 // React
 import React from 'react'
 import { useLoginModal } from '../hooks/use-login-modal'
@@ -41,7 +41,7 @@ export default function ModalRegister ({ button }: Props) {
   async function handleRegisterUser ({ email, name, password, confirmPassword }: UserRegister) {
     setLoading(true)
     try {
-      const response = await userService.register({
+      const response = await authService.register({
         confirmPassword,
         email,
         name,
