@@ -44,8 +44,8 @@ export const CategoryItem = (props: CategoriesInterface) => {
       onClick={handleSetCategory}
       className={`
         keen-slider__slide
-        p-2.5
         flex
+        py-3
         flex-col
         items-center
         justify-center
@@ -53,6 +53,7 @@ export const CategoryItem = (props: CategoriesInterface) => {
         transition-colors
         border-b-2
         max-h-16
+        w-full
         ${activeCategory !== props.id.toString() ? 'hover:border-zinc-300' : ''}
         ${activeCategory === props.id.toString() ? 'text-black' : 'text-zinc-300'}
         ${activeCategory === props.id.toString() ? 'border-black' : 'border-transparent'}

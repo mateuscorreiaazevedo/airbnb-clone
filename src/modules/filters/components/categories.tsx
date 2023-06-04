@@ -4,34 +4,33 @@
 import { categoriesMocks } from '../mocks/categories'
 
 // Utils
-import { useKeenSlider } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
+import Slider from 'react-slick'
 
 // React
 import React from 'react'
 
 // Components
 import { CategoryItem } from './category-item'
+import { ArrowSlider, settings } from '@/modules/core'
 
 const FilterModal = React.lazy(() => import('./modal-filters'))
 
 export const Categories = () => {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    initial: 0,
-    slides: {
-      perView: 8,
-      spacing: 12
-    }
-  })
+  const sliderRef = React.useRef<Slider | undefined>()
 
   return (
     <nav className="sticky top-20 mt-5 border-b border-b-zinc-100 w-full h-16 container gap-4 flex items-center justify-between">
-      <div className="relative w-full md:w-[90%]">
-        <div ref={sliderRef} className="keen-slider">
+      <div className="relative w-full md:w-[80%] lg:w-[85%] 2xl:w-[90%]">
+        <ArrowSlider onClick={() => sliderRef?.current?.slickPrev()} />
+        {/* @ts-expect-error Ref Slider */}
+        <Slider ref={sliderRef} {...settings}>
           {categoriesMocks.map(item => (
             <CategoryItem {...item} key={item.label} />
           ))}
-        </div>
+        </Slider>
+        <ArrowSlider hasRight onClick={() => sliderRef?.current?.slickNext()} />
       </div>
       <FilterModal />
     </nav>
