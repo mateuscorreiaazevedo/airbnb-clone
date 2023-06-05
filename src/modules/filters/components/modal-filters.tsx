@@ -3,10 +3,12 @@
 // Contents
 import { SlidersHorizontal } from 'lucide-react'
 
+// Utils
+import { useFiltersModal } from '../hooks/use-filters-modal'
+
 // Components
 import { Modal } from '@/main/ui'
 import React from 'react'
-import { useFiltersModal } from '../hooks/use-filters-modal'
 
 const ModalFilters = () => {
   const { open, setOpen } = useFiltersModal()
@@ -21,8 +23,8 @@ const ModalFilters = () => {
       isOpen={open}
       toggleOpenChange={setOpen}
     >
-      <div className="absolute p-4 w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg">
-          Filters
+      <div className="absolute animate-modal p-4 w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg">
+        Filtros
       </div>
     </Modal>
   )

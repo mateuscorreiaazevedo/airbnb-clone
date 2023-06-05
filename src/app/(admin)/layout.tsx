@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: 'Painél do anfitrião - Airbnb | Mateusdev'
+  title: 'Painél do anfitrião - Airbnb | @mateuscorreiaazevedo'
 }
 
 export default function AdminLayout ({ children }: {children: React.ReactNode}) {

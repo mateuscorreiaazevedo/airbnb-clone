@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@keyframes modal {
+  from {
+    transform: translateY(100%) translateX(50%);
+  } to {
+    transform: translateY(-50%) translateX(50%);
+  }
+}
+
+.animate-modal {
+  animation: modal .4s ease;
+}

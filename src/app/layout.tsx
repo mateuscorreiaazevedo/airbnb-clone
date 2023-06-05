@@ -9,7 +9,7 @@ import { AuthProvider } from '@/modules/core'
 const font = Nunito({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Airbnb | Mateus dev',
+  title: 'Airbnb | @mateuscorreiaazevedo',
   description: 'Airbnb clone create with next 13. Powered by @mateuscorreiaazevedo'
 }
 
