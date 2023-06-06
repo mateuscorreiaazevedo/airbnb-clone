@@ -1,9 +1,14 @@
+// Components
 import { HeaderAdmin } from '@/components/header'
-import { Metadata } from 'next'
+
+// React
 import React from 'react'
 
+// Types
+import { Metadata } from 'next'
+
 export const metadata: Metadata = {
-  title: 'Painél do anfitrião - Airbnb | @mateuscorreiaazevedo'
+  title: 'Painel do anfitrião - Airbnb | @mateuscorreiaazevedo'
 }
 
 export default function AdminLayout ({ children }: {children: React.ReactNode}) {
@@ -11,7 +16,7 @@ export default function AdminLayout ({ children }: {children: React.ReactNode}) 
     <>
       {/* @ts-expect-error Server Component */}
       <HeaderAdmin />
-      <main className="container w-full h-full">
+      <main className="container w-full h-full mt-2">
         {children}
       </main>
     </>

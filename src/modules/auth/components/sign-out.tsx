@@ -13,8 +13,8 @@ import React from 'react'
 const SignOut = () => {
   const { push } = useRouter()
 
-  function handleSignOut () {
-    signOut()
+  async function handleSignOut () {
+    await signOut()
     push('/')
   }
 

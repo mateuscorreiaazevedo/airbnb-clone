@@ -1,2 +1,2 @@
-export * from './main'
+export * from './app'
 export * from './admin'
