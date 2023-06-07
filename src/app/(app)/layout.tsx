@@ -1,8 +1,5 @@
-// Components
 import { Categories as CategoriesNavbar } from '@/modules/filters'
 import { HeaderApp } from '@/components/header'
-
-// React
 import React from 'react'
 
 export default function AppLayout ({ children }: { children: React.ReactNode }) {

@@ -1,18 +1,12 @@
 'use client'
 
-// Contents
-import { Menu } from 'lucide-react'
-
-// React
-import React from 'react'
-
-// Components
 import { Login, Register, SignOut } from '@/modules/auth'
-import { Avatar, ListItem, Popover } from '@/main/ui'
-
-// Utils
 import { useUserMenu } from '../hooks/use-user-menu'
+import { ListItem, Popover } from '@/main/ui'
+import { Menu } from 'lucide-react'
+import { Avatar } from './avatar'
 import Link from 'next/link'
+import React from 'react'
 
 type Props = {
   userAuth?: UserInfo | null

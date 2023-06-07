@@ -1,11 +1,6 @@
-// Components
 import { HeaderAdmin } from '@/components/header'
-
-// React
-import React from 'react'
-
-// Types
 import { Metadata } from 'next'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Painel do anfitrião - Airbnb | @mateuscorreiaazevedo'

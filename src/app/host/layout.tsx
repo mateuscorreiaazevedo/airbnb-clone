@@ -10,7 +10,7 @@ import { Plus } from 'lucide-react'
 // React
 import React from 'react'
 import { Metadata } from 'next'
-import { getLoggedUser } from '../actions/get-logged-user'
+import { getLoggedUser } from '../../modules/user/components/get-logged-user'
 import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {

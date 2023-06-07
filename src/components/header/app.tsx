@@ -1,15 +1,8 @@
-// Components
+import { UserMenu, getLoggedUser } from '@/modules/user'
 import { SearchBar } from '@/modules/core'
-import { UserMenu } from '@/modules/user'
+import { images } from '@/assets/images'
 import Image from 'next/image'
 import Link from 'next/link'
-
-// Utils
-import { getLoggedUser } from '@/app/actions/get-logged-user'
-
-// Contents
-import { images } from '@/assets/images'
-
 import React from 'react'
 
 export const HeaderApp = async () => {

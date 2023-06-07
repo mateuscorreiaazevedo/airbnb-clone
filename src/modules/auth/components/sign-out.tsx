@@ -1,13 +1,8 @@
 'use client'
 
-// Components
-import { ListItem } from '@/main/ui'
-
-// Utils
 import { useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-
-// React
+import { ListItem } from '@/main/ui'
 import React from 'react'
 
 const SignOut = () => {
