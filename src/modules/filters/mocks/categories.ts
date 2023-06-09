@@ -1,10 +1,13 @@
 import {
   Accessibility,
   BedDouble,
+  Building2,
+  Castle,
   Coffee,
   ConciergeBell,
   Flame,
   Grape,
+  Home,
   Hotel,
   MountainSnow,
   Palmtree,
@@ -12,6 +15,7 @@ import {
   Ship,
   Snowflake,
   Tent,
+  Warehouse,
   Waves
 } from 'lucide-react'
 import { CategoriesInterface } from '../types/filter-categories'
@@ -107,5 +111,29 @@ export const categoriesMocks: CategoriesInterface[] = [
     label: 'Uau!',
     icon: Rocket,
     description: 'Ut irure consectetur ullamco consectetur incididunt incididunt enim in aute sit amet ipsum exercitation.'
+  },
+  {
+    id: 15,
+    label: 'Casa',
+    icon: Home,
+    description: 'Quis irure dolore labore aute laboris consequat in laboris sunt labore sint id fugiat.'
+  },
+  {
+    id: 16,
+    label: 'Apartamento',
+    icon: Building2,
+    description: 'Esse Lorem commodo nulla labore incididunt.'
+  },
+  {
+    id: 17,
+    label: 'Garagem',
+    icon: Warehouse,
+    description: 'Dolore ipsum officia anim exercitation deserunt culpa exercitation.'
+  },
+  {
+    id: 18,
+    label: 'Castelo',
+    icon: Castle,
+    description: 'Cupidatat deserunt laboris irure ea adipisicing ex velit exercitation velit tempor laboris laborum occaecat sunt.'
   }
 ]

@@ -15,7 +15,8 @@ module.exports = {
     },
     extend: {
       animation: {
-        modal: 'animate-modal'
+        modal: 'animate-modal',
+        'slide-up': 'animate-slide-up'
       },
       scale: {
         input: '31.438rem'

@@ -1,9 +1,10 @@
 import { UserMenu, getLoggedUser } from '@/modules/user'
+import { redirect } from 'next/navigation'
 import { images } from '@/assets/images'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { redirect } from 'next/navigation'
+import { AdminNav } from '@/modules/admin'
 
 export const HeaderAdmin = async () => {
   const userAuth = await getLoggedUser()
@@ -17,6 +18,7 @@ export const HeaderAdmin = async () => {
       <Link href="/hosting" className="lg:mr-40">
         <Image src={images.airbnbBrand} alt="Airbnb Brand" className="w-8 aspect-square" />
       </Link>
+      <AdminNav />
       <UserMenu userAuth={userAuth} onlyAvatar />
     </header>
   )

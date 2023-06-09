@@ -11,6 +11,19 @@
   }
 }
 
+@keyframes slidetoup {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  } to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .animate-modal {
   animation: modal .4s ease;
+}
+.animate-slide-up {
+  animation: slidetoup .8s ease;
 }

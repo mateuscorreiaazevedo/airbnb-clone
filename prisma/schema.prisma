@@ -34,7 +34,6 @@ model Listing {
   description   String
   imageUrl      String
   createdAt     DateTime @default(now())
-  category      String
   categoryId    Int
   rooms         Int
   bathrooms     Int
