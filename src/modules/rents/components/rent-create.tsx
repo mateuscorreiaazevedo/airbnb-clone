@@ -45,6 +45,7 @@ export default function CreateRent () {
   const guests = watch('guests')
   const rooms = watch('rooms')
   const bathrooms = watch('bathrooms')
+  const imageUrl = watch('imageUrl')
 
   const handleValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -89,7 +90,10 @@ export default function CreateRent () {
         />
       )}
       {step === STEPS.IMAGES && (
-        <RentImages />
+        <RentImages
+          handleUploadImage={value => handleValue('imageUrl', value)}
+          imageUrl={imageUrl}
+        />
       )}
 
       <footer className="container fixed bottom-0 h-20 w-full bg-white border-t border-t-zinc-300 flex items-center justify-between">

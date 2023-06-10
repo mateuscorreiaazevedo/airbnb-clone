@@ -26,7 +26,7 @@ export const RentImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
   return (
     <CldUploadWidget
       onUpload={handleUpload}
-      uploadPreset=""
+      uploadPreset="tg3hdzx0"
       options={{
         maxFiles: 1
       }}
@@ -35,7 +35,7 @@ export const RentImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
         return (
           <div
             onClick={() => open()}
-            className='relative w-full h-full cursor-pointer hover:opacity-70 transition-all border-dashed border-2 p-20 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-400'
+            className='relative w-full h-full md:h-[60vh] cursor-pointer hover:opacity-70 transition-all border-dashed border-2 p-20 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-400'
           >
             <ImagePlus size={48} />
             <span className='font-semibold text-lg'>
@@ -48,7 +48,7 @@ export const RentImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
                 <Image
                   alt='Upload'
                   fill
-                  className='object-cover'
+                  className='w-full aspect-auto object-cover md:object-contain'
                   src={value}
                 />
               </div>
