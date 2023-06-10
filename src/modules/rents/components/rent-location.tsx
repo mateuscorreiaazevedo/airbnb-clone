@@ -1,3 +1,4 @@
+import { Heading } from '@/modules/core'
 import { RentLocationMap } from './rent-location-map'
 import { RentLocationSelect } from './rent-location-select'
 import React from 'react'
@@ -10,10 +11,10 @@ type Props = {
 export const LocationRent = ({ onChange, value }: Props) => {
   return (
     <>
-      <h1 className="animate-slide-up text-3xl font-bold">Onde fica sua acomodação?</h1>
-      <p className="animate-slide-up text-2xl text-zinc-400 font-extralight">
-        Seu endereço só é compartilhado com os hóspedes depois que a reserva é confirmada.
-      </p>
+      <Heading
+        title="Onde fica sua acomodação?"
+        subtitle="Seu endereço só é compartilhado com os hóspedes depois que a reserve é confirmada."
+      />
       <RentLocationSelect value={value} onChange={onChange} />
       <RentLocationMap location={value} />
     </>

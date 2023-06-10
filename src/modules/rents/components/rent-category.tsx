@@ -4,6 +4,7 @@ import { categoriesMocks } from '@/modules/filters'
 import { motion } from 'framer-motion'
 
 import React from 'react'
+import { Heading } from '@/modules/core'
 
 type Props = {
   setClick: (id: number) => void
@@ -13,9 +14,7 @@ type Props = {
 export const CategoryRent = ({ selectedCategory, setClick }: Props) => {
   return (
     <>
-      <h1 className="animate-slide-up text-3xl font-bold">
-        Qual das seguintes opções descreve melhor seu espaço?
-      </h1>
+      <Heading title="Qual das seguintes opções descreve melhor seu espaço?" />
       <motion.div
         initial="hidden"
         animate="visible"

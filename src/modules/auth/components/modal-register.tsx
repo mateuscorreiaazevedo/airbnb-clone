@@ -1,7 +1,7 @@
 'use client'
 
 // Components
-import { Button, InputField, ListItem, Modal } from '@/main/ui'
+import { ButtonPrimary, InputField, ListItem, Modal } from '@/main/ui'
 import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
@@ -97,7 +97,7 @@ export default function ModalRegister ({ button }: Props) {
                   Política de Privacidade
                 </a>
               </p>
-              <Button disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</Button>
+              <ButtonPrimary disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</ButtonPrimary>
             </form>
             <OauthOptions />
             <p className='text-sm text-center'>

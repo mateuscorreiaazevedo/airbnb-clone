@@ -1,5 +1,6 @@
 import { RentInfoCounter } from './rent-info-counter'
 import { slideUpContainer } from '@/main/animations'
+import { Heading } from '@/modules/core'
 import { motion } from 'framer-motion'
 import React from 'react'
 
@@ -22,13 +23,16 @@ export const RentInfo: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <h1 className="animate-slide-up w-full text-start text-3xl font-bold">
-        Compartilhe algumas noções básicas sobre seu lugar
-      </h1>
-      <p className="w-full mb-10 text-start animate-slide-up text-2xl text-zinc-400 font-extralight">
-        Quais comodidades você oferece?
-      </p>
-      <motion.div animate='visible' initial='hidden' variants={slideUpContainer} className='space-y-10 w-full'>
+      <Heading
+        title="Compartilhe algumas noções básicas sobre seu lugar"
+        subtitle="Quais comodidades você oferece?"
+      />
+      <motion.div
+        animate="visible"
+        initial="hidden"
+        variants={slideUpContainer}
+        className="space-y-10 w-full"
+      >
         <RentInfoCounter
           title="Convidados"
           subtitle="Quantidade de convidados?"
