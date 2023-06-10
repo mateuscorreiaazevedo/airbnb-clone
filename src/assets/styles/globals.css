@@ -27,3 +27,10 @@
 .animate-slide-up {
   animation: slidetoup .8s ease;
 }
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}

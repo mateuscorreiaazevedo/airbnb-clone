@@ -1,9 +1,9 @@
 'use client'
 
 import { FieldValues, useForm } from 'react-hook-form'
-import { CategoryRent } from './category-rent'
+import { CategoryRent } from './rent-category'
+import { LocationRent } from './rent-location'
 import React from 'react'
-import { LocationRent } from './location-rent'
 
 enum STEPS {
   CATEGORY = 0,
@@ -38,6 +38,7 @@ export default function CreateRent () {
   })
 
   const categoryId = watch('categoryId')
+  const location = watch('location')
 
   const handleValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -67,7 +68,8 @@ export default function CreateRent () {
       )}
       {step === STEPS.LOCATION && (
         <LocationRent
-
+          value={location}
+          onChange={value => handleValue('location', value)}
         />
       )}
 
