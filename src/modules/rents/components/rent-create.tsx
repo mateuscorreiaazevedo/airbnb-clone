@@ -3,6 +3,8 @@
 import { FieldValues, useForm } from 'react-hook-form'
 import { CategoryRent } from './rent-category'
 import { LocationRent } from './rent-location'
+import { RentImages } from './rent-images'
+import { RentInfo } from './rent-info'
 import React from 'react'
 
 enum STEPS {
@@ -37,8 +39,12 @@ export default function CreateRent () {
     }
   })
 
+  // Fields
   const categoryId = watch('categoryId')
   const location = watch('location')
+  const guests = watch('guests')
+  const rooms = watch('rooms')
+  const bathrooms = watch('bathrooms')
 
   const handleValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -48,13 +54,13 @@ export default function CreateRent () {
     })
   }
 
-  const onBack = () => {
+  const onBackStep = () => {
     if (step !== STEPS.CATEGORY) {
       setStep(state => state - 1)
     }
   }
 
-  const onNext = () => {
+  const onNextStep = () => {
     setStep(state => state + 1)
   }
 
@@ -72,15 +78,28 @@ export default function CreateRent () {
           onChange={value => handleValue('location', value)}
         />
       )}
+      {step === STEPS.INFO && (
+        <RentInfo
+          guests={guests}
+          rooms={rooms}
+          bathrooms={bathrooms}
+          changeGuests={count => handleValue('guests', count)}
+          changeRooms={count => handleValue('rooms', count)}
+          changeBathrooms={count => handleValue('bathrooms', count)}
+        />
+      )}
+      {step === STEPS.IMAGES && (
+        <RentImages />
+      )}
 
       <footer className="container fixed bottom-0 h-20 w-full bg-white border-t border-t-zinc-300 flex items-center justify-between">
         <button
-          onClick={onBack}
+          onClick={onBackStep}
           className="underline font-bold transition-all px-2 py-1 hover:bg-neutral-100 rounded-md"
         >
           Voltar
         </button>
-        <button onClick={step !== STEPS.PRICE ? onNext : () => {}} className="font-semibold bg-zinc-900 px-8 py-3 hover:bg-zinc-950 rounded-md text-white">
+        <button onClick={step !== STEPS.PRICE ? onNextStep : () => { console.log('log') }} className="font-semibold bg-zinc-900 px-8 py-3 hover:bg-zinc-950 rounded-md text-white">
           {step !== STEPS.PRICE ? 'Avançar' : 'Concluir'}
         </button>
       </footer>

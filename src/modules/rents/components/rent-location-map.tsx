@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/main/ui'
+import { ButtonPrimary } from '@/main/ui'
 import { useCurrentLocation } from '@/modules/core'
 import { MapPin } from 'lucide-react'
 import dynamic from 'next/dynamic'
@@ -21,10 +21,10 @@ export const RentLocationMap: React.FC<Props> = ({ location }) => {
   return (
     <div className="animate-slide-up w-full flex flex-col gap-4">
       {!location && (
-        <Button onClick={setLocation} style={{ width: '100%' }}>
+        <ButtonPrimary onClick={setLocation} style={{ width: '100%' }}>
           <MapPin className="w-8 h-8 mr-4" />
           Usar minha localização atual
-        </Button>
+        </ButtonPrimary>
       )}
       <Map center={location?.latlng ?? currentLocation} />
     </div>

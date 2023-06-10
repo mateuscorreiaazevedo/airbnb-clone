@@ -1,4 +1,4 @@
-import { CreateRent } from '@/modules/listings'
+import { CreateRent } from '@/modules/rents'
 import { Metadata } from 'next'
 import React from 'react'
 
