@@ -15,7 +15,7 @@ interface ImageProps {
   value: string
 }
 
-export const RentImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
+export const ImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
   const handleUpload = React.useCallback(
     (result: any) => {
       onChange(result.info.secure_url)
@@ -35,7 +35,7 @@ export const RentImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
         return (
           <div
             onClick={() => open()}
-            className='relative w-full h-full md:h-[60vh] cursor-pointer hover:opacity-70 transition-all border-dashed border-2 p-20 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-400'
+            className=' rounded-lg relative w-full aspect-video cursor-pointer hover:opacity-70 transition-all border-dashed border-2 p-20 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-400'
           >
             <ImagePlus size={48} />
             <span className='font-semibold text-lg'>
@@ -48,7 +48,7 @@ export const RentImageUpload: React.FC<ImageProps> = ({ onChange, value }) => {
                 <Image
                   alt='Upload'
                   fill
-                  className='w-full aspect-auto object-cover md:object-contain'
+                  className='w-full rounded-lg aspect-auto object-cover md:object-contain'
                   src={value}
                 />
               </div>

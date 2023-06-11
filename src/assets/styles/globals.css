@@ -28,6 +28,12 @@
   animation: slidetoup .8s ease;
 }
 
+.no-arrow::-webkit-inner-spin-button,
+.no-arrow::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .leaflet-bottom,
 .leaflet-control,
 .leaflet-pane,

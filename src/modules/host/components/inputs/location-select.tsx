@@ -9,7 +9,7 @@ type Props = {
   onChange: (value: CountrySelectValue) => void
 }
 
-export const RentLocationSelect: React.FC<Props> = ({ onChange, value }) => {
+export const LocationSelect: React.FC<Props> = ({ onChange, value }) => {
   const getAll = countriesHelper.getAll()
 
   return (

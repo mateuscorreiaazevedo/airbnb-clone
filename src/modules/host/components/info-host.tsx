@@ -1,5 +1,5 @@
-import { RentInfoCounter } from './rent-info-counter'
 import { slideUpContainer } from '@/main/animations'
+import { InfoCounter } from './inputs/info-counter'
 import { Heading } from '@/modules/core'
 import { motion } from 'framer-motion'
 import React from 'react'
@@ -13,7 +13,7 @@ type Props = {
   changeBathrooms: (value: number) => void
 }
 
-export const RentInfo: React.FC<Props> = ({
+export const InfoHost: React.FC<Props> = ({
   bathrooms,
   changeGuests,
   changeRooms,
@@ -33,19 +33,19 @@ export const RentInfo: React.FC<Props> = ({
         variants={slideUpContainer}
         className="space-y-10 w-full"
       >
-        <RentInfoCounter
+        <InfoCounter
           title="Convidados"
           subtitle="Quantidade de convidados?"
           value={guests}
           onChange={changeGuests}
         />
-        <RentInfoCounter
+        <InfoCounter
           title="Cômodos"
           subtitle="Quantidade de cômodos?"
           value={rooms}
           onChange={changeRooms}
         />
-        <RentInfoCounter
+        <InfoCounter
           title="Banheiros"
           subtitle="Quantidade de banheiros?"
           value={bathrooms}

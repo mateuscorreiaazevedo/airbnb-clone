@@ -1,5 +1,5 @@
+import { CategoryInput } from './inputs/category-input'
 import { slideUpContainer } from '@/main/animations'
-import { RentCategoryInput } from './rent-category-input'
 import { categoriesMocks } from '@/modules/filters'
 import { motion } from 'framer-motion'
 
@@ -11,7 +11,7 @@ type Props = {
   selectedCategory: number
 }
 
-export const CategoryRent = ({ selectedCategory, setClick }: Props) => {
+export const CategoryHost = ({ selectedCategory, setClick }: Props) => {
   return (
     <>
       <Heading title="Qual das seguintes opções descreve melhor seu espaço?" />
@@ -22,7 +22,7 @@ export const CategoryRent = ({ selectedCategory, setClick }: Props) => {
         className="mt-4 grid grid-cols-2 w-full md:grid-cols-3 gap-4"
       >
         {categoriesMocks.map(item => (
-          <RentCategoryInput
+          <CategoryInput
             item={item}
             setCategoryId={setClick}
             categoryId={selectedCategory}

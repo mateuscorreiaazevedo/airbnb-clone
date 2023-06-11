@@ -1,8 +1,7 @@
-// Utils
+'use client'
 import { useFormContext } from 'react-hook-form'
-// React
-import React from 'react'
 import { Eye, EyeOff } from 'lucide-react'
+import React from 'react'
 
 type Props = React.HtmlHTMLAttributes<HTMLInputElement> & {
   field: string
@@ -11,6 +10,7 @@ type Props = React.HtmlHTMLAttributes<HTMLInputElement> & {
   roundedTop?: boolean
   rounded?: boolean
   hasPassword?: boolean
+  hasNumber?: boolean
 }
 
 export function InputField (props: Props) {
@@ -21,9 +21,19 @@ export function InputField (props: Props) {
     roundedBotton = false,
     roundedTop = false,
     hasPassword,
+    hasNumber,
     ...rest
   } = props
   const [viewPassword, setViewPassword] = React.useState(hasPassword)
+  let type = ''
+
+  if (hasPassword) {
+    type = viewPassword ? 'password' : 'text'
+  } else if (hasNumber) {
+    type = 'number'
+  } else {
+    type = 'text'
+  }
 
   const { register } = useFormContext()
 
@@ -31,7 +41,7 @@ export function InputField (props: Props) {
     <div className="relative w-fit h-fit">
       <input
         id={field}
-        type={viewPassword ? 'password' : 'text'}
+        type={type}
         {...register(field)}
         {...rest}
         placeholder=" "
@@ -43,6 +53,7 @@ export function InputField (props: Props) {
           pl-4
           pr-10
           h-14
+          resize-none
           pt-4
           border
           outline-none
@@ -50,6 +61,7 @@ export function InputField (props: Props) {
           ${rounded ? 'rounded-lg' : ''}
           ${roundedBotton ? 'rounded-b-lg' : ''}
           ${roundedTop ? 'rounded-t-lg' : ''}
+          ${hasNumber ? 'no-arrow' : ''}
           focus:border-rose-500
           focus:border-2
           focus:z-10
@@ -71,10 +83,12 @@ export function InputField (props: Props) {
           peer-focus/input:left-3
           peer-focus/input:font-light
           peer-focus/input:text-xs
+          peer-focus/input:translate-y-0
           top-1
           left-3
           font-light
           text-xs
+          translate-y-0
         "
       >
         {label}

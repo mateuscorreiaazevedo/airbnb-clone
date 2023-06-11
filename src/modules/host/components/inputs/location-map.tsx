@@ -1,7 +1,7 @@
 'use client'
 
-import { ButtonPrimary } from '@/main/ui'
 import { useCurrentLocation } from '@/modules/core'
+import { ButtonPrimary } from '@/main/ui'
 import { MapPin } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import React from 'react'
@@ -10,7 +10,7 @@ type Props = {
   location: CountrySelectValue
 }
 
-export const RentLocationMap: React.FC<Props> = ({ location }) => {
+export const LocationMap: React.FC<Props> = ({ location }) => {
   const { currentLocation, setLocation } = useCurrentLocation()
 
   const Map = React.useMemo(
@@ -21,7 +21,7 @@ export const RentLocationMap: React.FC<Props> = ({ location }) => {
   return (
     <div className="animate-slide-up w-full flex flex-col gap-4">
       {!location && (
-        <ButtonPrimary onClick={setLocation} style={{ width: '100%' }}>
+        <ButtonPrimary type='button' onClick={setLocation} style={{ width: '100%' }}>
           <MapPin className="w-8 h-8 mr-4" />
           Usar minha localização atual
         </ButtonPrimary>

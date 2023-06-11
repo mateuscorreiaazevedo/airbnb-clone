@@ -13,7 +13,7 @@ interface CounterProps {
   onChange: (value: number) => void
 }
 
-export const RentInfoCounter: React.FC<CounterProps> = ({
+export const InfoCounter: React.FC<CounterProps> = ({
   onChange,
   subtitle,
   title,
@@ -37,11 +37,11 @@ export const RentInfoCounter: React.FC<CounterProps> = ({
         <span className="font-light text-gray-400">{subtitle}</span>
       </div>
       <div className="flex flex-row items-center gap-4">
-        <ButtonRounded onClick={handleReduceCounter}>
+        <ButtonRounded type='button' onClick={handleReduceCounter}>
           <Minus size={24} />
         </ButtonRounded>
         <h3 className="font-light text-xl text-neutral-600">{value}</h3>
-        <ButtonRounded onClick={handleAddCounter}>
+        <ButtonRounded type='button' onClick={handleAddCounter}>
           <Plus size={24} />
         </ButtonRounded>
       </div>
