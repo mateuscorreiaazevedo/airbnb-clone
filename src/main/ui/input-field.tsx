@@ -11,6 +11,7 @@ type Props = React.HtmlHTMLAttributes<HTMLInputElement> & {
   rounded?: boolean
   hasPassword?: boolean
   hasNumber?: boolean
+  required?: boolean
 }
 
 export function InputField (props: Props) {
@@ -22,6 +23,7 @@ export function InputField (props: Props) {
     roundedTop = false,
     hasPassword,
     hasNumber,
+    required = false,
     ...rest
   } = props
   const [viewPassword, setViewPassword] = React.useState(hasPassword)
@@ -35,17 +37,18 @@ export function InputField (props: Props) {
     type = 'text'
   }
 
-  const { register } = useFormContext()
+  const { register, formState: { errors } } = useFormContext()
 
   return (
     <div className="relative w-fit h-fit">
       <input
         id={field}
         type={type}
-        {...register(field)}
+        {...register(field, { required })}
         {...rest}
         placeholder=" "
         className={`
+        ${errors[field] ? 'border-rose-500 border-2' : 'border border-zinc-400'}
         relative
         peer/input
           -mt-1
@@ -55,9 +58,7 @@ export function InputField (props: Props) {
           h-14
           resize-none
           pt-4
-          border
           outline-none
-          border-zinc-400
           ${rounded ? 'rounded-lg' : ''}
           ${roundedBotton ? 'rounded-b-lg' : ''}
           ${roundedTop ? 'rounded-t-lg' : ''}

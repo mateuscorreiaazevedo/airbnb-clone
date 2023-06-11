@@ -13,12 +13,7 @@ interface CounterProps {
   onChange: (value: number) => void
 }
 
-export const InfoCounter: React.FC<CounterProps> = ({
-  onChange,
-  subtitle,
-  title,
-  value
-}) => {
+export const InfoCounter: React.FC<CounterProps> = ({ onChange, subtitle, title, value }) => {
   const handleAddCounter = React.useCallback(() => {
     onChange(value + 1)
   }, [onChange, value])
@@ -31,17 +26,22 @@ export const InfoCounter: React.FC<CounterProps> = ({
   }, [onChange, value])
 
   return (
-    <motion.div variants={slideUpItem} className="flex flex-row w-full items-center justify-between">
+    <motion.div
+      variants={slideUpItem}
+      className="flex flex-row w-full items-center justify-between"
+    >
       <div className="flex flex-col">
         <p className="font-semibold">{title}</p>
         <span className="font-light text-gray-400">{subtitle}</span>
       </div>
       <div className="flex flex-row items-center gap-4">
-        <ButtonRounded type='button' onClick={handleReduceCounter}>
-          <Minus size={24} />
-        </ButtonRounded>
+        {value > 1 && (
+          <ButtonRounded type="button" onClick={handleReduceCounter}>
+            <Minus size={24} />
+          </ButtonRounded>
+        )}
         <h3 className="font-light text-xl text-neutral-600">{value}</h3>
-        <ButtonRounded type='button' onClick={handleAddCounter}>
+        <ButtonRounded type="button" onClick={handleAddCounter}>
           <Plus size={24} />
         </ButtonRounded>
       </div>

@@ -7,5 +7,16 @@ interface HostForm {
   imageUrl: string
   price: number
   title: string
-  descriptions: string
+  description: string
+}
+interface HostServiceForm {
+  categoryId: number
+  locationValue: string
+  guests: number
+  rooms: number
+  bathrooms: number
+  imageUrl: string
+  price: number
+  title: string
+  description: string
 }

@@ -7,3 +7,6 @@ export * from './service/service'
 export * from './utils/countries-helper'
 export * from './hooks/use-current-location'
 export * from './components/heading'
+export * from './components/footer-fixed'
+
+export * from './types/children'
