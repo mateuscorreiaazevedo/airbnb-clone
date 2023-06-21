@@ -16,11 +16,8 @@ import { authService } from '../service/auth-service'
 import React from 'react'
 import { useLoginModal } from '../hooks/use-login-modal'
 
-type Props = {
-  button?: React.JSX.Element
-}
 
-export default function ModalRegister ({ button }: Props) {
+export default function ModalRegister () {
   const [loading, setLoading] = React.useState(false)
   const { setOpen: closePopover } = useUserMenu()
   const { setOpen: setLogin } = useLoginModal()
@@ -29,7 +26,7 @@ export default function ModalRegister ({ button }: Props) {
 
   const closeModal = () => {
     methods.reset()
-    closePopover()
+    closePopover(false)
     setOpen()
   }
 
@@ -59,7 +56,6 @@ export default function ModalRegister ({ button }: Props) {
   return (
     <FormProvider {...methods}>
       <Modal
-        button={button || <ListItem asBold>Cadastrar-se</ListItem>}
         isOpen={open}
         toggleOpenChange={setOpen}
       >

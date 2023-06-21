@@ -2,7 +2,7 @@ import { Categories as CategoriesNavbar } from '@/modules/filters'
 import { HeaderApp } from '@/components/header'
 import React from 'react'
 
-export default function AppLayout ({ children }: { children: React.ReactNode }) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {/* @ts-expect-error Server Components */}

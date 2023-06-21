@@ -1,6 +1,6 @@
 'use client'
 
-import { Login, Register, SignOut } from '@/modules/auth'
+import { SignOut, useLoginModal, useRegisterModal } from '@/modules/auth'
 import { useUserMenu } from '../hooks/use-user-menu'
 import { ListItem, Popover } from '@/main/ui'
 import { Menu } from 'lucide-react'
@@ -15,6 +15,8 @@ type Props = {
 
 export const UserMenu = ({ userAuth, onlyAvatar = false }: Props) => {
   const { open, setOpen } = useUserMenu()
+  const {setOpen: openLogin} = useLoginModal()
+  const {setOpen: openRegister} = useRegisterModal()
 
   return (
     <Popover
@@ -51,8 +53,8 @@ export const UserMenu = ({ userAuth, onlyAvatar = false }: Props) => {
               )
             : (
             <>
-              <Register />
-              <Login />
+             <ListItem onClick={()=>openLogin()} asBold>Entrar</ListItem>
+             <ListItem onClick={()=>openRegister()}>Cadastrar-se</ListItem>
             </>
               )}
           <div className="w-full h-px bg-zinc-200 my-2" />

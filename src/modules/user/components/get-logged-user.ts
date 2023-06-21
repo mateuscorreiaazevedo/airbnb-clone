@@ -31,7 +31,7 @@ export async function getLoggedUser () {
       createdAt: rest.createdAt.toISOString(),
       updatedAt: rest.updatedAt.toISOString(),
       emailVerified: rest.emailVerified?.toISOString() || null,
-    }
+    } as UserInfo
   } catch (error) {
     return null
   }

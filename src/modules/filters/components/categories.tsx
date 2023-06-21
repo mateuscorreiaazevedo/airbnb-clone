@@ -28,7 +28,7 @@ export const Categories = () => {
 
   return (
     <nav className="sticky top-20 mt-5 border-b border-b-zinc-100 w-full h-16 container gap-4 flex items-center justify-between">
-      <div className="relative w-full md:w-[80%] lg:w-[85%] 2xl:w-[90%]">
+      <div className="relative w-full">
         <ArrowSlider onClick={() => sliderRef?.current?.slickPrev()} />
         {/* @ts-expect-error Ref Slider */}
         <Slider ref={sliderRef} {...settings}>

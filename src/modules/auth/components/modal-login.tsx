@@ -16,11 +16,8 @@ import { signIn } from 'next-auth/react'
 // React
 import React from 'react'
 
-type Props = {
-  button?: React.JSX.Element
-}
 
-export default function ModalLogin ({ button }: Props) {
+export default function ModalLogin () {
   const { setOpen: openRegister } = useRegisterModal()
   const [loading, setLoading] = React.useState(false)
   const { setOpen: closePopover } = useUserMenu()
@@ -32,7 +29,7 @@ export default function ModalLogin ({ button }: Props) {
     methods.reset()
     setOpen()
     refresh()
-    closePopover()
+    closePopover(false)
   }
 
   async function handleLoginUser ({ email, password }: UserLogin) {
@@ -56,7 +53,6 @@ export default function ModalLogin ({ button }: Props) {
   return (
     <FormProvider {...methods}>
       <Modal
-        button={button || <ListItem>Entrar</ListItem>}
         isOpen={open}
         toggleOpenChange={setOpen}
       >

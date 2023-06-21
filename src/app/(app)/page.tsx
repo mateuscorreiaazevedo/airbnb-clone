@@ -1,6 +1,20 @@
-import Link from 'next/link'
-import React from 'react'
+import { ListingService, ListingsMap } from "@/modules/listings"
+import { EmptyState } from "@/modules/core"
+import { getLoggedUser } from "@/modules/user"
 
-export default function Home () {
-  return <Link target='_blank' href='/rooms'>Home</Link>
+export default async function Home() {
+  const listings = await ListingService.getAllListings()
+  const authUser = await getLoggedUser()
+
+  if (listings?.length === 0) {
+    return (
+      <EmptyState showReset />
+    )
+  }
+
+  return (
+    <div className='container mt-20'>
+      <ListingsMap data={listings!} authUser={authUser} />
+    </div>
+  )
 }

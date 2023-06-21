@@ -8,5 +8,6 @@ export * from './utils/countries-helper'
 export * from './hooks/use-current-location'
 export * from './components/heading'
 export * from './components/footer-fixed'
+export * from './components/empty-state'
 
 export * from './types/children'
