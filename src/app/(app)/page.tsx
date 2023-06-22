@@ -1,9 +1,9 @@
-import { ListingService, ListingsMap } from "@/modules/listings"
+import { listingService, ListingsMap } from "@/modules/listings"
 import { EmptyState } from "@/modules/core"
 import { getLoggedUser } from "@/modules/user"
 
 export default async function Home() {
-  const listings = await ListingService.getAllListings()
+  const listings = await listingService.getAll()
   const authUser = await getLoggedUser()
 
   if (listings?.length === 0) {

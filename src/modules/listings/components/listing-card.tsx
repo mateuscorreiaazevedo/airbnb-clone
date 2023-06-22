@@ -11,7 +11,7 @@ interface Props {
 
 export const ListingCard: React.FC<Props> = ({ listing, authUser }) => {
   return (
-    <div className='relative flex flex-col items-center w-fit h-fit p-2 rounded-lg hover:bg-neutral-50 justify-center gap-2'>
+    <div className='relative flex flex-col transition-all items-center w-fit h-fit p-2 rounded-lg hover:bg-neutral-50 justify-center gap-2'>
       <Link href={`/rooms/${listing.id}`} target='_blank' className='flex flex-col items-center justify-center gap-2'>
         <Image
           alt={listing.title}
@@ -21,14 +21,17 @@ export const ListingCard: React.FC<Props> = ({ listing, authUser }) => {
           className='rounded-lg aspect-square w-64 object-cover'
         />
         <div className='w-full flex flex-col'>
-          <h3 className='font-semibold text-sm'>{listing.title}</h3>
-          <p className='text-sm text-neutral-400'>{listing.locationValue}</p>
+          <div className='inline-flex'>
+            <h3 className='font-semibold text-sm'>{listing.title}</h3>
+            <span className='mr-1'>,{' '}</span>
+            <p className='text-sm text-neutral-400'>{listing.locationValue}</p>
+          </div>
           <p className='font-semibold'>
             R${listing.price} <span className='font-light'>noite</span>
           </p>
         </div>
       </Link>
-      <ListingButtonFavorities authUser={authUser} />
+      <ListingButtonFavorities listingId={listing.id} authUser={authUser} />
     </div>
   )
 }

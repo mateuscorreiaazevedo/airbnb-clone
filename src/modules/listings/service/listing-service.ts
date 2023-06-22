@@ -1,11 +1,11 @@
-import { prismaDb } from "@/main/config"
+import { prismaDb } from "@/main/config";
 
-export namespace ListingService {
-  export const getAllListings = async () => {
+class ListingService {
+  async getAll() {
     try {
 
       const response = await prismaDb?.listing.findMany({
-        orderBy: {createdAt: 'desc'}
+        orderBy: { createdAt: 'desc' }
       })
 
       const listings: Listing[] | undefined = response?.map(item => ({
@@ -18,6 +18,7 @@ export namespace ListingService {
       throw new Error(error as any);
 
     }
-
   }
 }
+
+export const listingService = new ListingService()
