@@ -3,9 +3,9 @@
 import { favoriteService } from '../service/favorite-service'
 import { setNotification } from '@/modules/core'
 import { useLoginModal } from '@/modules/auth'
-import { Heart } from 'lucide-react'
-import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { Heart } from 'lucide-react'
+import React from 'react'
 
 type Props = {
   authUser: UserInfo | null

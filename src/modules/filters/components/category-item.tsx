@@ -12,31 +12,20 @@ import { CategoriesInterface } from '../types/filter-categories'
 
 export const CategoryItem = (props: CategoriesInterface) => {
   const params = useSearchParams()
-  const categoryId = useSetCategoryId(props.id.toString(), params)
+  const queryString = useSetCategoryId(props.id.toString(), params)
+  const { push, refresh } = useRouter()
   const pathname = usePathname()
-  const { push } = useRouter()
 
-  const hasCategoryId = params?.has('category_id')
+  const activeCategory = React.useMemo(() => {
+    const categoryId = params?.get('category_id') || '1'
 
-  const [activeCategory, setActiveCategory] = React.useState(() => {
-    if (hasCategoryId) {
-      return params?.get('category_id') as string
-    } else {
-      return '1'
-    }
-  })
+    return categoryId
+  }, [params, queryString])
 
   function handleSetCategory () {
-    push(`${pathname}?${categoryId}`)
+    push(`${pathname}?${queryString}`)
+    refresh()
   }
-
-  React.useEffect(() => {
-    if (hasCategoryId) {
-      setActiveCategory(params?.get('category_id') as string)
-    } else {
-      setActiveCategory('1')
-    }
-  }, [params])
 
   return (
     <button

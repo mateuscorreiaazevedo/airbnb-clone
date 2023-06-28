@@ -1,10 +1,11 @@
 import { prismaDb } from "@/main/config";
 
 class ListingService {
-  async getAll() {
+  async getAll(filter?: any) {
     try {
 
       const response = await prismaDb?.listing.findMany({
+        where: filter,
         orderBy: { createdAt: 'desc' }
       })
 
