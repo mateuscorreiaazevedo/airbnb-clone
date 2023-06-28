@@ -1,16 +1,15 @@
-// Components
-import * as Dialog from '@radix-ui/react-dialog'
+'use client'
 
-// React
+import * as Dialog from '@radix-ui/react-dialog'
 import React from 'react'
 
 type Props = {
   children: React.ReactNode
-  isOpen: boolean
-  toggleOpenChange: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen?: boolean
+  toggleOpenChange?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function Modal (props: Props) {
+export function Modal(props: Props) {
   const { children, isOpen, toggleOpenChange } = props
 
   return (

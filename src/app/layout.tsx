@@ -6,6 +6,7 @@ import '../assets/styles/globals.css'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from '@/modules/core'
 import { Login, Register } from '@/modules/auth'
+import { ListingModal } from '@/modules/listings'
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
             />
             <Login />
             <Register />
+            <ListingModal />
             {children}
         </AuthProvider>
       </body>
