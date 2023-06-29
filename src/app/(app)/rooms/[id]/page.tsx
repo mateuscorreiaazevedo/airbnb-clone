@@ -1,12 +1,13 @@
+import { images } from '@/assets/images'
 import { countriesHelper } from '@/modules/core'
 import { categoriesMocks } from '@/modules/filters'
 import {
   ListingButtonFavorities,
-  ListingButtonReservation,
   ListingMap,
   ListingModalButton,
   listingService
 } from '@/modules/listings'
+import { ReservationForm } from '@/modules/reservations'
 import { getLoggedUser } from '@/modules/user'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
@@ -44,9 +45,9 @@ export default async function Room({ params }: Props) {
         {room.title} | {room.locationValue}
       </h1>
       <div className='flex items-center justify-between w-full'>
-        <span className='text-neutral-400'>
-          {location?.region}, {location?.label}
-        </span>
+        <p className='text-neutral-400'>
+          {location?.region}, <span className='font-semibold'>{location?.label}</span>
+        </p>
         <ListingButtonFavorities authUser={authUser} listingId={room.id!} variant='outline' />
       </div>
       <section className='flex gap-4 items-stretch justify-between'>
@@ -56,30 +57,26 @@ export default async function Room({ params }: Props) {
           width={4000}
           height={4000}
           loading='lazy'
-          className='aspect-video w-3/5 rounded-lg'
+          className='aspect-video w-3/5 rounded-lg shadow'
         />
         <aside className='w-2/5 h-full rounded-lg border-neutral-100 border shadow-sm p-4 flex flex-col gap-4'>
-          <div className='flex gap-4 items-center justify-center'>
-            <h2 className='text-lg font-semibold'>
-              {category?.label} (Hospedado por {room.user.name})
-            </h2>
-            <Image
-              alt={room.user.name!}
-              src={room.user.image!}
-              width={100}
-              height={100}
-              className='aspect-square rounded-full w-12'
-            />
-          </div>
-          <section className='flex flex-col justify-normal items-center w-full gap-2 border-t border-b py-4 border-t-neutral-100 border-b-neutral-100'>
-            <div className='flex items-center justify-between w-full'>
-              Quantidade de hóspedes <span className='font-semibold w-12 flex items-center justify-center'>{room.guests}</span>
+          <section className='flex flex-col gap-2 border-b border-b-neutral-100 py-2'>
+            <div className='flex gap-4 items-center justify-center'>
+              <h2 className='text-lg font-semibold'>
+                {category?.label} (Hospedado por {room.user.name})
+              </h2>
+              <Image
+                alt={room.user.name!}
+                src={room.user.image ?? images.avatarPlaceholder}
+                width={100}
+                height={100}
+                className='aspect-square rounded-full w-12'
+              />
             </div>
-            <div className='flex items-center justify-between w-full'>
-              Quantidade de Cômodos <span className='font-semibold w-12 flex items-center justify-center'>{room.rooms}</span>
-            </div>
-            <div className='flex items-center justify-between w-full'>
-              Quantidade de Banheiros <span className='font-semibold w-12 flex items-center justify-center'>{room.bathrooms}</span>
+            <div className='flex gap-2 text-xs text-neutral-400'>
+              <span>{room.guests} Hóspedes</span>
+              <span>{room.rooms} Cômodos</span>
+              <span>{room.bathrooms} Banheiros</span>
             </div>
           </section>
           <section className='flex flex-col items-stretch justify-normal gap-2'>
@@ -91,21 +88,23 @@ export default async function Room({ params }: Props) {
                 noite
               </span>
             </div>
-            <ListingButtonReservation />
+            <ReservationForm authUser={authUser} room={room} />
           </section>
         </aside>
       </section>
-      <section className='w-full flex flex-col items-stretch justify-normal gap-4 mb-10'>
-        <h3 className='text-2xl font-bold'>Descrição</h3>
-        <p>
-          {room.description}
-        </p>
-        <ListingModalButton room={room} />
-      </section>
-      <section className='w-full flex flex-col items-stretch justify-normal gap-4 mb-10'>
-        <h3 className='text-2xl font-bold'>Localização</h3>
-        <ListingMap value={room.locationValue!} />
-      </section>
+      <article className='flex items-stretch justify-between gap-4'>
+        <section className='w-full flex flex-col items-stretch justify-normal gap-4 mb-10'>
+          <h3 className='text-2xl font-bold'>Descrição</h3>
+          <p>
+            {room.description}
+          </p>
+          <ListingModalButton room={room} />
+        </section>
+        <section className='w-full flex flex-col items-stretch justify-normal gap-4 mb-10'>
+          <h3 className='text-2xl font-bold'>Localização</h3>
+          <ListingMap value={room.locationValue!} />
+        </section>
+      </article>
     </div>
   )
 }

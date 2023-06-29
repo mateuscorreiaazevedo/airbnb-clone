@@ -2,7 +2,6 @@ import { lazy } from 'react'
 
 export * from './service/listing-service'
 export * from './components/listing-button-favorities'
-export * from './components/listing-button-reservation'
 export * from './components/listing-modal-button'
 
 export * from './hooks/use-modal-description'

@@ -16,7 +16,6 @@ import { CategoryItem } from './category-item'
 import { ArrowSlider, settings } from '@/modules/core'
 import { usePathname } from 'next/navigation'
 
-const FilterModal = React.lazy(() => import('./modal-filters'))
 
 export const Categories = () => {
   const sliderRef = React.useRef<Slider | undefined>()
@@ -38,7 +37,6 @@ export const Categories = () => {
         </Slider>
         <ArrowSlider hasRight onClick={() => sliderRef?.current?.slickNext()} />
       </div>
-      <FilterModal />
     </nav>
   )
 }

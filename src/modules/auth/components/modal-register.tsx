@@ -59,7 +59,7 @@ export default function ModalRegister () {
         isOpen={open}
         toggleOpenChange={setOpen}
       >
-        <div className="absolute w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg animate-modal -translate-y-1/2">
+        <div className="fixed w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg animate-modal -translate-y-1/2">
           <section className="flex w-full items-center px-4 h-16 border-b border-zinc-300">
             <button
               onClick={closeModal}

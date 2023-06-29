@@ -27,9 +27,11 @@ const ListingMap = ({ value }: Props) => {
   }, [value])
 
   return (
-    <Map
-      center={localtion?.latlng}
-    />
+    <React.Suspense fallback={<>Carregando mapa...</>}>
+      <Map
+        center={localtion?.latlng}
+      />
+    </React.Suspense>
   )
 }
 
