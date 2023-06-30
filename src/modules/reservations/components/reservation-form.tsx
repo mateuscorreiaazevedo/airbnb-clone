@@ -1,10 +1,11 @@
 'use client'
 
-import { setNotification } from '@/modules/core'
+import { FormProvider, useForm } from 'react-hook-form'
+import { formattersHelper, setNotification } from '@/modules/core'
 import { useLoginModal } from '@/modules/auth'
 import { ButtonPrimary } from '@/main/ui'
-import { FormProvider, useForm } from 'react-hook-form'
 import React from 'react'
+import dayjs from 'dayjs'
 
 type Props = {
   authUser: UserInfo | null
@@ -21,13 +22,37 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
       babies: 0
     }
   })
-  const { handleSubmit, register } = methods
+  const { handleSubmit, register, watch, setValue } = methods
+
+  const totalPrice = watch('totalPrice')
+  const checkIn = watch('checkIn')
+  const checkOut = watch('checkOut')
+
+  const totalPriceFormatted = formattersHelper.formatMoney(totalPrice)
+
+  React.useMemo(() => {
+    const startDate = dayjs(checkIn)
+    const endDate = dayjs(checkOut)
+
+    const rangeDate = endDate.diff(startDate, 'day')
+
+    if(rangeDate < 0) {
+      setNotification('A data de check-out não pode ser anterior a data de check-in', 'error')
+      return
+    }
+    if (rangeDate === 0) {
+      return
+    }
+
+    setValue('totalPrice', rangeDate * room.price!)
+
+  }, [totalPrice, checkIn, checkOut])
 
 
 
-  async function handleReservation() {
+  async function handleReservation(formData: ReservationForm) {
     if (authUser) {
-      setNotification('Olá', 'default')
+      // setNotification('Olá', 'default')
       return
     }
 
@@ -68,7 +93,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
         </ButtonPrimary>
       </form>
       <p className='flex items-center pt-2 justify-between font-bold'>
-        Total (sem impostos) <span>R$900</span>
+        Total (sem impostos) {totalPrice && <span>{totalPriceFormatted}</span>}
       </p>
     </FormProvider>
   )

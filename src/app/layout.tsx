@@ -2,13 +2,16 @@
 import { Nunito } from 'next/font/google'
 import '../assets/styles/globals.css'
 
-// Components
-import { Toaster } from 'react-hot-toast'
-import { AuthProvider } from '@/modules/core'
-import { Login, Register } from '@/modules/auth'
 import { ListingModal } from '@/modules/listings'
+import { Login, Register } from '@/modules/auth'
+import { AuthProvider } from '@/modules/core'
+import timezone from 'dayjs/plugin/timezone'
+import { Toaster } from 'react-hot-toast'
+import dayjs from 'dayjs'
 
 const font = Nunito({ subsets: ['latin'] })
+dayjs.extend(timezone)
+
 
 export const metadata = {
   title: 'Airbnb | @mateuscorreiaazevedo',
@@ -16,6 +19,9 @@ export const metadata = {
 }
 
 export default function RootLayout ({ children }: { children: React.ReactNode }) {
+
+
+
   return (
     <html lang="pt-br" className={font.className}>
       <body className="w-full min-h-screen">
