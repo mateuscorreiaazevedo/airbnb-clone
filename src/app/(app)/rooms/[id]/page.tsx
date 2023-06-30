@@ -1,5 +1,5 @@
 import { images } from '@/assets/images'
-import { countriesHelper } from '@/modules/core'
+import { countriesHelper, formattersHelper } from '@/modules/core'
 import { categoriesMocks } from '@/modules/filters'
 import {
   ListingButtonFavorities,
@@ -74,15 +74,15 @@ export default async function Room({ params }: Props) {
               />
             </div>
             <div className='flex gap-2 text-xs text-neutral-400'>
-              <span>{room.guests} Hóspedes</span>
-              <span>{room.rooms} Cômodos</span>
-              <span>{room.bathrooms} Banheiros</span>
+              <span>{room.guests} Hóspede(s)</span>
+              <span>{room.rooms} Cômodo(s)</span>
+              <span>{room.bathrooms} Banheiro(s)</span>
             </div>
           </section>
           <section className='flex flex-col items-stretch justify-normal gap-2'>
             <div>
               <strong className='text-xl'>
-                R${room.price}
+                {formattersHelper.formatMoney(room.price!)}
               </strong>
               <span className='ml-2'>
                 noite

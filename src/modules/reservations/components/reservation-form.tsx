@@ -34,7 +34,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
 
     const rangeDate = endDate.diff(startDate, 'day')
 
-    if(rangeDate < 0) {
+    if (rangeDate < 0) {
       setNotification('A data de check-out não pode ser anterior a data de check-in', 'error')
       return
     }
