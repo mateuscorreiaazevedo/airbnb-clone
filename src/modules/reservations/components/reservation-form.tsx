@@ -28,9 +28,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
   const checkIn = watch('checkIn')
   const checkOut = watch('checkOut')
 
-  const totalPriceFormatted = formattersHelper.formatMoney(totalPrice)
-
-  React.useMemo(() => {
+  const totalPriceFormatted = React.useMemo(() => {
     const startDate = dayjs(checkIn)
     const endDate = dayjs(checkOut)
 
@@ -44,10 +42,11 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
       return
     }
 
-    setValue('totalPrice', rangeDate * room.price!)
+    const resultOfRangeDateAndPrice = rangeDate * room.price!
+    setValue('totalPrice', resultOfRangeDateAndPrice)
 
+    return formattersHelper.formatMoney(totalPrice)
   }, [totalPrice, checkIn, checkOut])
-
 
 
   async function handleReservation(formData: ReservationForm) {
@@ -93,7 +92,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
         </ButtonPrimary>
       </form>
       <p className='flex items-center pt-2 justify-between font-bold'>
-        Total (sem impostos) {totalPrice && <span>{totalPriceFormatted}</span>}
+        Total (sem impostos) {totalPrice >= room.price! && <span>{totalPriceFormatted}</span>}
       </p>
     </FormProvider>
   )
