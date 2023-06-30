@@ -15,8 +15,15 @@ const PopoverInfo = React.lazy(() => import('./reservation-popover-info'))
 
 export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
   const { setOpen: setLoginModal } = useLoginModal()
-  const methods = useForm()
+  const methods = useForm<ReservationForm>({
+    defaultValues: {
+      guests: 1,
+      babies: 0
+    }
+  })
   const { handleSubmit, register } = methods
+
+
 
   async function handleReservation() {
     if (authUser) {
