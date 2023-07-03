@@ -2,6 +2,7 @@ import { ReservationCard, reservationService } from '@/modules/reservations'
 import { getLoggedUser } from '@/modules/user'
 import { EmptyState } from '@/modules/core'
 import React from 'react'
+import { redirect } from 'next/navigation'
 
 export const metadata = {
   title: 'Suas viagens  - Airbnb | @mateuscorreiaazevedo'
@@ -10,6 +11,10 @@ export const metadata = {
 export default async function MyReservations() {
   const authUser = await getLoggedUser()
   let reservations: Reservation[] | undefined
+
+  if(!authUser) {
+    redirect('/')
+  }
 
   try {
     reservations = await reservationService.getAllByUser(authUser?.id as string)

@@ -5,14 +5,14 @@ import { NextResponse } from "next/server"
 
 interface Props {
   params: {
-    listingId: string
+    id: string
   }
 }
 
 export async function POST(req: Request, { params }: Props) {
   const authUser = await getLoggedUser()
   const body = await req.json()
-  const { listingId } = params
+  const { id: listingId } = params
 
   const { checkIn, checkOut, guests, totalPrice, babies } = body as ReservationForm
 

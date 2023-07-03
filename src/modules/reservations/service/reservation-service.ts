@@ -36,6 +36,26 @@ class ReservationService {
       endDate: item.endDate.toISOString(),
     }))
   }
+
+  async deleteReservation(reservationId: string) {
+    const { body, statusCode } = await service.request<{ message: string, error?: string }>({
+      url: `/reservation/${reservationId}/delete`,
+      method: 'delete'
+    })
+
+    switch (statusCode) {
+      case 200:
+        return body.message
+      case 401:
+        throw new Error(body.error)
+      case 404:
+        throw new Error(body.error)
+      case 422:
+        throw new Error(body.error)
+      default:
+        throw new Error("Erro inesperado no servidor. Por favor, tente novamente mais tarde")
+    }
+  }
 }
 
 export const reservationService = new ReservationService()
