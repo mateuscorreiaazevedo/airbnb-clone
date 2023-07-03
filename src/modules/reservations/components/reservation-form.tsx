@@ -19,7 +19,9 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
   const methods = useForm<ReservationForm>({
     defaultValues: {
       guests: 1,
-      babies: 0
+      babies: 0,
+      checkIn: dayjs().toISOString().split('T')[0],
+      checkOut: dayjs().add(1, 'day').toISOString().split('T')[0]
     }
   })
   const { handleSubmit, register, watch, setValue } = methods
@@ -28,7 +30,9 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
   const checkIn = watch('checkIn')
   const checkOut = watch('checkOut')
 
-  const totalPriceFormatted = React.useMemo(() => {
+  const formattedPrice = formattersHelper.formatMoney(totalPrice)
+
+  React.useMemo(() => {
     const startDate = dayjs(checkIn)
     const endDate = dayjs(checkOut)
 
@@ -45,7 +49,6 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
     const resultOfRangeDateAndPrice = rangeDate * room.price!
     setValue('totalPrice', resultOfRangeDateAndPrice)
 
-    return formattersHelper.formatMoney(totalPrice)
   }, [totalPrice, checkIn, checkOut])
 
 
@@ -65,9 +68,11 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
           <div className='flex-1 p-2 flex flex-col'>
             <label htmlFor="checkIn" className='uppercase font-semibold text-zinc-800 text-xs'>Check-In</label>
             <input
+              type='date'
               id='checkIn'
               {...register('checkIn')}
-              type='date'
+              defaultValue={checkIn.toString()}
+              min={dayjs().toISOString().split('T')[0]}
               className='outline-none text-zinc-600 font-semibold'
             />
           </div>
@@ -75,10 +80,12 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
           <div className='flex-1 p-2 flex flex-col'>
             <label htmlFor="checkOut" className='uppercase font-semibold text-zinc-800 text-xs'>Checkout</label>
             <input
-              id='checkOut'
-              {...register('checkOut')}
               type='date'
+              id='checkOut'
+              defaultValue={checkOut.toString()}
+              {...register('checkOut')}
               className='outline-none text-zinc-600 font-semibold'
+              min={dayjs(checkIn).add(1, 'day').toISOString().split('T')[0]}
             />
           </div>
         </fieldset>
@@ -92,7 +99,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
         </ButtonPrimary>
       </form>
       <p className='flex items-center pt-2 justify-between font-bold'>
-        Total (sem impostos) {totalPrice >= room.price! && <span>{totalPriceFormatted}</span>}
+        Total (sem impostos) {totalPrice >= room.price! && <span>{formattedPrice}</span>}
       </p>
     </FormProvider>
   )
