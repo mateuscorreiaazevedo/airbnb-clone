@@ -6,6 +6,8 @@ import { useLoginModal } from '@/modules/auth'
 import { ButtonPrimary } from '@/main/ui'
 import React from 'react'
 import dayjs from 'dayjs'
+import { reservationService } from '../service/reservation-service'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   authUser: UserInfo | null
@@ -16,6 +18,7 @@ const PopoverInfo = React.lazy(() => import('./reservation-popover-info'))
 
 export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
   const { setOpen: setLoginModal } = useLoginModal()
+  const router = useRouter()
   const methods = useForm<ReservationForm>({
     defaultValues: {
       guests: 1,
@@ -32,7 +35,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
 
   const formattedPrice = formattersHelper.formatMoney(totalPrice)
 
-  React.useMemo(() => {
+  React.useEffect(() => {
     const startDate = dayjs(checkIn)
     const endDate = dayjs(checkOut)
 
@@ -54,7 +57,14 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
 
   async function handleReservation(formData: ReservationForm) {
     if (authUser) {
-      // setNotification('Olá', 'default')
+      try {
+        const message = await reservationService.newReservation(formData, room.id!)
+        setNotification(message, 'success')
+        router.refresh()
+        router.push('/')
+      } catch (error) {
+        setNotification((error as any).message, 'error')
+      }
       return
     }
 
@@ -82,10 +92,10 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
             <input
               type='date'
               id='checkOut'
-              defaultValue={checkOut.toString()}
               {...register('checkOut')}
               className='outline-none text-zinc-600 font-semibold'
               min={dayjs(checkIn).add(1, 'day').toISOString().split('T')[0]}
+              defaultValue={dayjs(checkIn).add(1, 'day').toISOString().split('T')[0]}
             />
           </div>
         </fieldset>
