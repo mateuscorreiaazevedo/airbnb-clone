@@ -2,16 +2,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-// Contents
-import { images } from '@/assets/images'
-import { Plus } from 'lucide-react'
-
-// React
-import React from 'react'
-import { Metadata } from 'next'
-import { getLoggedUser } from '../../modules/user/components/get-logged-user'
-import { redirect } from 'next/navigation'
 import { HostModalsButton } from '@/components/header'
+import { getLoggedUser } from '@/modules/user'
+import { redirect } from 'next/navigation'
+import { images } from '@/assets/images'
+import { Metadata } from 'next'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Hospede na sua casa com o Airbnb'

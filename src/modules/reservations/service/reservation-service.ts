@@ -1,3 +1,5 @@
+import MyReservations from "@/app/(app)/trips/page";
+import { prismaDb } from "@/main/config";
 import { service } from "@/modules/core";
 
 class ReservationService {
@@ -18,6 +20,21 @@ class ReservationService {
       default:
         throw new Error("Erro inesperado no servidor. Por favor, tente novamente mais tarde")
     }
+  }
+
+  async getAllByUser(userId: string): Promise<Reservation[] | undefined> {
+    const myReservations = await prismaDb?.reservation.findMany({
+      where: {
+        userId
+      }
+    })
+
+    return myReservations?.map(item => ({
+      ...item,
+      createdAt: item.createdAt.toISOString(),
+      startDate: item.startDate.toISOString(),
+      endDate: item.endDate.toISOString(),
+    }))
   }
 }
 

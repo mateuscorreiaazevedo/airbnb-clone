@@ -14,8 +14,8 @@ export const ListingCard: React.FC<Props> = ({ listing, authUser }) => {
     <div className='relative flex flex-col transition-all items-center w-fit h-fit p-2 rounded-lg hover:bg-neutral-50 justify-center gap-2'>
       <Link href={`/rooms/${listing.id}`} target='_blank' className='flex flex-col items-center justify-center gap-2'>
         <Image
-          alt={listing.title}
-          src={listing.imageUrl}
+          alt={listing.title as string}
+          src={listing.imageUrl as string}
           width={300}
           height={300}
           className='rounded-lg aspect-square w-64 object-cover'
@@ -31,7 +31,7 @@ export const ListingCard: React.FC<Props> = ({ listing, authUser }) => {
           </p>
         </div>
       </Link>
-      <ListingButtonFavorities listingId={listing.id} authUser={authUser} />
+      <ListingButtonFavorities listingId={listing.id as string} authUser={authUser} />
     </div>
   )
 }

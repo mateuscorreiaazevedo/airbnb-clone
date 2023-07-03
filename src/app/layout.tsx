@@ -5,13 +5,11 @@ import '../assets/styles/globals.css'
 import { ListingModal } from '@/modules/listings'
 import { Login, Register } from '@/modules/auth'
 import { AuthProvider } from '@/modules/core'
-import timezone from 'dayjs/plugin/timezone'
 import { Toaster } from 'react-hot-toast'
 import dayjs from 'dayjs'
 
 const font = Nunito({ subsets: ['latin'] })
-dayjs.extend(timezone)
-
+dayjs.locale(require('dayjs/locale/pt-br'))
 
 export const metadata = {
   title: 'Airbnb | @mateuscorreiaazevedo',

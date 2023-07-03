@@ -9,11 +9,13 @@ interface Props {
   title?: string
   subtitle?: string
   showReset?: boolean
+  titleButton?: string
 }
 
 export const EmptyState: React.FC<Props> = ({
   title = 'Nenhuma correspondência',
   subtitle = 'Tente alterar ou remover alguns de seus filtros',
+  titleButton = 'Remover todos os filtros',
   showReset
 }) => {
   const router = useRouter()
@@ -31,7 +33,7 @@ export const EmptyState: React.FC<Props> = ({
       <div className="mt-4">
         {showReset && (
           <ButtonPrimary styles="outline" onClick={()=>router.push('/')}>
-            Remove all filters
+            {titleButton}
           </ButtonPrimary>
         )}
       </div>
