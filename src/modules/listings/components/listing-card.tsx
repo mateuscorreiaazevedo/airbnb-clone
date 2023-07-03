@@ -1,3 +1,4 @@
+import { formattersHelper } from '@/modules/core'
 import { ListingButtonFavorities } from './listing-button-favorities'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -27,7 +28,7 @@ export const ListingCard: React.FC<Props> = ({ listing, authUser }) => {
             <p className='text-sm text-neutral-400'>{listing.locationValue}</p>
           </div>
           <p className='font-semibold'>
-            R${listing.price} <span className='font-light'>noite</span>
+            {formattersHelper.formatMoney(listing.price!)} <span className='font-light'>noite</span>
           </p>
         </div>
       </Link>

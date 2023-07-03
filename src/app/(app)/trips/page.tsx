@@ -8,7 +8,7 @@ export const metadata = {
   title: 'Suas viagens  - Airbnb | @mateuscorreiaazevedo'
 }
 
-export default async function MyReservations() {
+export default async function Trips() {
   const authUser = await getLoggedUser()
   let reservations: Reservation[] | undefined
 

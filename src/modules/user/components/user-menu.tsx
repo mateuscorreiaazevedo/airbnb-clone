@@ -54,7 +54,9 @@ export const UserMenu = ({ userAuth, onlyAvatar = false }: Props) => {
                 <ListItem onClick={() => handlePush('/trips')}>
                   Minhas viagens
                 </ListItem>
-                <ListItem>Meus favoritos</ListItem>
+                <ListItem onClick={() => handlePush('/my-favorites')}>
+                  Meus favoritos
+                </ListItem>
                 <SignOut />
               </>
             )
@@ -66,7 +68,7 @@ export const UserMenu = ({ userAuth, onlyAvatar = false }: Props) => {
             )}
           <div className="w-full h-px bg-zinc-200 my-2" />
           {!userAuth && (
-            <ListItem onClick={()=>handlePush('/host/homes')}>
+            <ListItem onClick={() => handlePush('/host/homes')}>
               Anuncie seu espaço no airbnb
             </ListItem>
           )}
