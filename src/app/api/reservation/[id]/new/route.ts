@@ -1,9 +1,8 @@
-import { prismaDb } from "@/main/config"
 import { rangeDates } from "@/modules/reservations"
 import { getLoggedUser } from "@/modules/user"
-import dayjs from "dayjs"
 import { NextResponse } from "next/server"
-import { root } from "postcss"
+import { prismaDb } from "@/main/config"
+import dayjs from "dayjs"
 
 interface Props {
   params: {
@@ -44,29 +43,18 @@ export async function POST(req: Request, { params }: Props) {
 
 
   // Verify Dates
-  const existingReservationVerify = room?.reservations.map(item => {
-    const startDate = item.startDate.toISOString().split('T')[0]
-    const endDate = item.endDate.toISOString().split('T')[0]
+  const existingReservation = room?.reservations.flatMap(item => rangeDates(item.startDate, item.endDate))
+  const verifyReservation = rangeDates(checkIn.toString(), checkOut.toString())
+  const hasConflit = existingReservation?.some(value =>verifyReservation.includes(value))
 
-    return rangeDates(startDate, endDate)
-  })[0]
-  const newReservationVerify = rangeDates(checkIn.toString(), checkOut.toString())
-
-  function conflitDates() {
+  const initExistingReservation = existingReservation![0]
+  const finalExistingReservation = existingReservation![existingReservation!.length - 1]
 
 
-    const compareDates = existingReservationVerify?.some(value => {
-      return newReservationVerify.includes(value)
-    })
-
-    return compareDates
-  }
-
-
-  if (conflitDates()) {
+  if (hasConflit) {
     return NextResponse.json(
       {
-        error: `As datas de ${existingReservationVerify![0]} à ${existingReservationVerify![existingReservationVerify!.length - 1]} estão reservadas.`
+        error: `As datas de ${initExistingReservation} à ${finalExistingReservation} estão reservadas.`
       },
       {
         status: 422
