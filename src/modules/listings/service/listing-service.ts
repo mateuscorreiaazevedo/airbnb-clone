@@ -1,5 +1,4 @@
-import { prismaDb } from "@/main/config";
-
+import { prismaDb } from '@/main/config'
 
 class ListingService {
   async getAll() {
@@ -15,8 +14,7 @@ class ListingService {
 
       return listings
     } catch (error) {
-      throw new Error(error as any);
-
+      throw new Error(error as any)
     }
   }
 

@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Loading () {
+export default function Loading() {
   return (
-    <div className='absolute inset-0 flex items-center justify-center'>
+    <div className="absolute inset-0 flex items-center justify-center">
       <div
-        className='
+        className="
           w-20
           h-20
           border-4
@@ -13,7 +13,7 @@ export default function Loading () {
           border-l-pink-500
           animate-spin
           rounded-full
-        '
+        "
       />
     </div>
   )

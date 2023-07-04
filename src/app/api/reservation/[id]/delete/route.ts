@@ -1,6 +1,6 @@
-import { prismaDb } from "@/main/config"
-import { getLoggedUser } from "@/modules/user"
-import { NextResponse } from "next/server"
+import { prismaDb } from '@/main/config'
+import { getLoggedUser } from '@/modules/user'
+import { NextResponse } from 'next/server'
 
 type Props = {
   params: {
@@ -23,7 +23,10 @@ export async function DELETE(_req: Request, { params }: Props) {
   })
 
   if (!reservation) {
-    return NextResponse.json({ error: 'A reserva não foi encontrada.' }, { status: 404 })
+    return NextResponse.json(
+      { error: 'A reserva não foi encontrada.' },
+      { status: 404 }
+    )
   }
 
   reservation = await prismaDb?.reservation.delete({
@@ -32,6 +35,5 @@ export async function DELETE(_req: Request, { params }: Props) {
     }
   })
 
-  return NextResponse.json({message: 'Reserva cancelada com sucesso.'})
-
+  return NextResponse.json({ message: 'Reserva cancelada com sucesso.' })
 }

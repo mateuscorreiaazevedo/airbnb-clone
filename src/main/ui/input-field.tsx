@@ -14,7 +14,7 @@ type Props = React.HtmlHTMLAttributes<HTMLInputElement> & {
   required?: boolean
 }
 
-export function InputField (props: Props) {
+export function InputField(props: Props) {
   const {
     field,
     label,
@@ -37,7 +37,10 @@ export function InputField (props: Props) {
     type = 'text'
   }
 
-  const { register, formState: { errors } } = useFormContext()
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext()
 
   return (
     <div className="relative w-fit h-fit">

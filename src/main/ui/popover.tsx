@@ -11,16 +11,12 @@ type Props = {
   setOpen: () => void
 }
 
-export default function PopoverUi ({ button, children, open, setOpen }:Props) {
+export default function PopoverUi({ button, children, open, setOpen }: Props) {
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <Popover.Trigger asChild>
-        {button}
-      </Popover.Trigger>
+      <Popover.Trigger asChild>{button}</Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content asChild>
-          {children}
-        </Popover.Content>
+        <Popover.Content asChild>{children}</Popover.Content>
       </Popover.Portal>
     </Popover.Root>
   )

@@ -25,7 +25,11 @@ export const LocationMap: React.FC<Props> = ({ location }) => {
     >
       <div className=" w-full flex flex-col gap-4">
         {!location && (
-          <ButtonPrimary type='button' onClick={setLocation} style={{ width: '100%' }}>
+          <ButtonPrimary
+            type="button"
+            onClick={setLocation}
+            style={{ width: '100%' }}
+          >
             <MapPin className="w-8 h-8 mr-4" />
             Usar minha localização atual
           </ButtonPrimary>

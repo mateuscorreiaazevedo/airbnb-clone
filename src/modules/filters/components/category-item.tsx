@@ -22,7 +22,7 @@ export const CategoryItem = (props: CategoriesInterface) => {
     return categoryId
   }, [params, queryString])
 
-  function handleSetCategory () {
+  function handleSetCategory() {
     push(`${pathname}?${queryString}`)
     refresh()
   }
@@ -45,7 +45,11 @@ export const CategoryItem = (props: CategoriesInterface) => {
         w-full
         ${activeCategory !== props.id.toString() ? 'hover:border-zinc-300' : ''}
         ${activeCategory === props.id.toString() ? 'text-black' : 'text-zinc-300'}
-        ${activeCategory === props.id.toString() ? 'border-black' : 'border-transparent'}
+        ${
+          activeCategory === props.id.toString()
+            ? 'border-black'
+            : 'border-transparent'
+        }
         `}
     >
       <props.icon size={24} />

@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 
 export const formattersHelper = {
   formatMoney: (value: number) => {
@@ -17,6 +17,6 @@ export const formattersHelper = {
     forInputs: (value: string | Date) => {
       const formattedDate = dayjs(value).format('yyyy-mm-dd')
       return formattedDate
-    },
+    }
   }
 }

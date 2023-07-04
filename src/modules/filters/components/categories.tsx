@@ -16,7 +16,6 @@ import { CategoryItem } from './category-item'
 import { ArrowSlider, settings } from '@/modules/core'
 import { usePathname } from 'next/navigation'
 
-
 export const Categories = () => {
   const sliderRef = React.useRef<Slider | undefined>()
   const pathname = usePathname()

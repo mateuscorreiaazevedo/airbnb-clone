@@ -110,13 +110,15 @@ export const categoriesMocks: CategoriesInterface[] = [
     id: 14,
     label: 'Uau!',
     icon: Rocket,
-    description: 'Ut irure consectetur ullamco consectetur incididunt incididunt enim in aute sit amet ipsum exercitation.'
+    description:
+      'Ut irure consectetur ullamco consectetur incididunt incididunt enim in aute sit amet ipsum exercitation.'
   },
   {
     id: 15,
     label: 'Casa',
     icon: Home,
-    description: 'Quis irure dolore labore aute laboris consequat in laboris sunt labore sint id fugiat.'
+    description:
+      'Quis irure dolore labore aute laboris consequat in laboris sunt labore sint id fugiat.'
   },
   {
     id: 16,
@@ -134,6 +136,7 @@ export const categoriesMocks: CategoriesInterface[] = [
     id: 18,
     label: 'Castelo',
     icon: Castle,
-    description: 'Cupidatat deserunt laboris irure ea adipisicing ex velit exercitation velit tempor laboris laborum occaecat sunt.'
+    description:
+      'Cupidatat deserunt laboris irure ea adipisicing ex velit exercitation velit tempor laboris laborum occaecat sunt.'
   }
 ]

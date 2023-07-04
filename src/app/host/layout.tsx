@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   title: 'Hospede na sua casa com o Airbnb'
 }
 
-export default async function HostLayout({ children }: { children: React.ReactNode }) {
+export default async function HostLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   const userAuth = await getLoggedUser()
 
   if (userAuth) {
@@ -22,18 +26,22 @@ export default async function HostLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <header className='container w-full flex items-center justify-between h-20 sticky top-0'>
-        <Link href='/'>
-          <Image src={images.airbnbBrand} alt='Airbnb brand' className='w-[102px] h-8' />
+      <header className="container w-full flex items-center justify-between h-20 sticky top-0">
+        <Link href="/">
+          <Image
+            src={images.airbnbBrand}
+            alt="Airbnb brand"
+            className="w-[102px] h-8"
+          />
         </Link>
         <div className="flex gap-8 items-center">
-          <p className="font-semibold text-base w-fit">Pronto para anunciar no Airbnb?</p>
+          <p className="font-semibold text-base w-fit">
+            Pronto para anunciar no Airbnb?
+          </p>
           <HostModalsButton />
         </div>
       </header>
-      <main className="container w-full h-full">
-        {children}
-      </main>
+      <main className="container w-full h-full">{children}</main>
     </>
   )
 }

@@ -2,7 +2,10 @@ import { toast } from 'react-hot-toast'
 
 type MessageTypeProps = 'success' | 'error' | 'default'
 
-export const setNotification = (message: string, type: MessageTypeProps = 'default') => {
+export const setNotification = (
+  message: string,
+  type: MessageTypeProps = 'default'
+) => {
   switch (type) {
     case 'success':
       return toast.success(message)

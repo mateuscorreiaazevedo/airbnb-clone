@@ -12,7 +12,7 @@ export default async function Trips() {
   const authUser = await getLoggedUser()
   let reservations: Reservation[] | undefined
 
-  if(!authUser) {
+  if (!authUser) {
     redirect('/')
   }
 
@@ -25,18 +25,18 @@ export default async function Trips() {
   if (reservations?.length === 0 || reservations === undefined) {
     return (
       <EmptyState
-        title='Nenhuma viagem programada... Ainda!'
-        subtitle='Hora de tirar o pó das malas e começar a planejar a próxima aventura'
-        titleButton='Começar busca'
+        title="Nenhuma viagem programada... Ainda!"
+        subtitle="Hora de tirar o pó das malas e começar a planejar a próxima aventura"
+        titleButton="Começar busca"
         showReset
       />
     )
   }
 
   return (
-    <article className='mt-10 flex flex-col gap-4'>
-      <h1 className='text-4xl font-bold'>Minhas viagens</h1>
-      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'>
+    <article className="mt-10 flex flex-col gap-4">
+      <h1 className="text-4xl font-bold">Minhas viagens</h1>
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {reservations.map(item => (
           // @ts-expect-error Server Component
           <ReservationCard {...item} key={item.id} />

@@ -12,11 +12,10 @@ export const ListingModalButton = ({ room }: Props) => {
   async function handleOpenModal() {
     setRoom(room)
     setOpen()
-
   }
 
   return (
-    <button className='underline self-start' onClick={handleOpenModal}>
+    <button className="underline self-start" onClick={handleOpenModal}>
       ver mais
     </button>
   )

@@ -1,13 +1,12 @@
-import { prismaDb } from "@/main/config"
-import { getLoggedUser } from "@/modules/user"
-import { NextResponse } from "next/server"
+import { prismaDb } from '@/main/config'
+import { getLoggedUser } from '@/modules/user'
+import { NextResponse } from 'next/server'
 
 interface Props {
   params: {
     listingId: string
   }
 }
-
 
 export async function PUT(req: Request, { params }: Props) {
   const authUser = await getLoggedUser()
@@ -17,7 +16,7 @@ export async function PUT(req: Request, { params }: Props) {
     return NextResponse.json({ error: 'Usuário não autenticado.' }, { status: 401 })
   }
 
-  let favoriteIds = [...(authUser.favoriteIds) || []]
+  const favoriteIds = [...(authUser.favoriteIds || [])]
 
   if (favoriteIds.includes(listingId)) {
     const updateFavorites = favoriteIds.filter(id => id !== listingId)

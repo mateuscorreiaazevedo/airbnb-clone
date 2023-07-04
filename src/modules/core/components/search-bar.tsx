@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react'
 import React from 'react'
 
-export function SearchBar () {
+export function SearchBar() {
   return (
     <div className="w-[432px] shadow-md cursor-pointer transition-all shadow-zinc-100 hover:shadow-zinc-300 text-sm h-12 items-center justify-around flex border border-zinc-300 rounded-full font-semibold">
       <button className="pl-2">Qualquer lugar</button>

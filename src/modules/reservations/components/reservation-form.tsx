@@ -56,10 +56,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
 
     const resultOfRangeDateAndPrice = rangeDate * room.price!
     setValue('totalPrice', resultOfRangeDateAndPrice)
-
-
   }, [totalPrice, checkIn, checkOut])
-
 
   async function handleReservation(formData: ReservationForm) {
     if (authUser) {
@@ -79,49 +76,62 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(handleReservation)} className='flex flex-col'>
-        <fieldset className='flex h-14 items-center justify-between gap-4 border border-b-transparent border-zinc-300 rounded-t-lg'>
-          <div className='flex-1 p-2 flex flex-col'>
-            <label htmlFor="checkIn" className='uppercase font-semibold text-zinc-800 text-xs'>Check-In</label>
+      <form onSubmit={handleSubmit(handleReservation)} className="flex flex-col">
+        <fieldset className="flex h-14 items-center justify-between gap-4 border border-b-transparent border-zinc-300 rounded-t-lg">
+          <div className="flex-1 p-2 flex flex-col">
+            <label
+              htmlFor="checkIn"
+              className="uppercase font-semibold text-zinc-800 text-xs"
+            >
+              Check-In
+            </label>
             <input
-              type='date'
-              id='checkIn'
+              type="date"
+              id="checkIn"
               {...register('checkIn')}
               defaultValue={checkIn.toString()}
               min={dayjs().toISOString().split('T')[0]}
-              className='outline-none text-zinc-600 font-semibold'
+              className="outline-none text-zinc-600 font-semibold"
             />
           </div>
-          <div className='w-px h-14 bg-zinc-300' />
-          <div className='flex-1 p-2 flex flex-col'>
-            <label htmlFor="checkOut" className='uppercase font-semibold text-zinc-800 text-xs'>Checkout</label>
+          <div className="w-px h-14 bg-zinc-300" />
+          <div className="flex-1 p-2 flex flex-col">
+            <label
+              htmlFor="checkOut"
+              className="uppercase font-semibold text-zinc-800 text-xs"
+            >
+              Checkout
+            </label>
             <input
-              className='outline-none text-zinc-600 font-semibold'
-              type='date'
-              id='checkOut'
+              className="outline-none text-zinc-600 font-semibold"
+              type="date"
+              id="checkOut"
               {...register('checkOut')}
               defaultValue={defaultCheckOut}
               min={dayjs(checkIn).add(1, 'day').toISOString().split('T')[0]}
             />
           </div>
         </fieldset>
-        <fieldset className='border mb-2 h-14 border-zinc-300 rounded-b-lg'>
+        <fieldset className="border mb-2 h-14 border-zinc-300 rounded-b-lg">
           <PopoverInfo maxGuests={room.guests} />
         </fieldset>
-        <ButtonPrimary type='submit' style={{
-          width: '100%'
-        }}>
+        <ButtonPrimary
+          type="submit"
+          style={{
+            width: '100%'
+          }}
+        >
           Reservar
         </ButtonPrimary>
       </form>
-      <p className='flex items-center pt-2 justify-between font-bold'>
-      Total(sem impostos)
+      <p className="flex items-center pt-2 justify-between font-bold">
+        Total(sem impostos)
         {mounted ? (
           <span className="animate-pulse bg-gray-200 rounded w-20 h-4"></span>
         ) : (
           <span>{formattedPrice}</span>
         )}
       </p>
-    </FormProvider >
+    </FormProvider>
   )
 }

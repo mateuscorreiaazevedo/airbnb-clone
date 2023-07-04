@@ -25,7 +25,7 @@ export const DescriptionHost = () => {
         variants={slideUpItem}
         {...register('description')}
         placeholder="Insira uma descrição sobre seu espaço"
-        className='w-full outline-none border border-zinc-400 focus:border-2 focus-within:border-rose-500 py-4 px-6 resize-none min-h-[40vh] rounded-lg transition-all'
+        className="w-full outline-none border border-zinc-400 focus:border-2 focus-within:border-rose-500 py-4 px-6 resize-none min-h-[40vh] rounded-lg transition-all"
       />
     </motion.div>
   )

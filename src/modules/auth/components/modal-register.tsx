@@ -1,7 +1,7 @@
 'use client'
 
 // Components
-import { ButtonPrimary, InputField, ListItem, Modal } from '@/main/ui'
+import { ButtonPrimary, InputField, Modal } from '@/main/ui'
 import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
@@ -16,8 +16,7 @@ import { authService } from '../service/auth-service'
 import React from 'react'
 import { useLoginModal } from '../hooks/use-login-modal'
 
-
-export default function ModalRegister () {
+export default function ModalRegister() {
   const [loading, setLoading] = React.useState(false)
   const { setOpen: closePopover } = useUserMenu()
   const { setOpen: setLogin } = useLoginModal()
@@ -35,7 +34,12 @@ export default function ModalRegister () {
     setOpen()
   }
 
-  async function handleRegisterUser ({ email, name, password, confirmPassword }: UserRegister) {
+  async function handleRegisterUser({
+    email,
+    name,
+    password,
+    confirmPassword
+  }: UserRegister) {
     setLoading(true)
     try {
       const response = await authService.register({
@@ -55,10 +59,7 @@ export default function ModalRegister () {
 
   return (
     <FormProvider {...methods}>
-      <Modal
-        isOpen={open}
-        toggleOpenChange={setOpen}
-      >
+      <Modal isOpen={open} toggleOpenChange={setOpen}>
         <div className="fixed w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg animate-modal -translate-y-1/2">
           <section className="flex w-full items-center px-4 h-16 border-b border-zinc-300">
             <button
@@ -87,19 +88,21 @@ export default function ModalRegister () {
                 />
               </fieldset>
               <p className="text-zinc-400 text-xs w-field">
-                Ligaremos ou enviaremos uma mensagem para confirmar seu número. Podem ser
-                aplicadas tarifas padrão de dados e mensagens.{' '}
+                Ligaremos ou enviaremos uma mensagem para confirmar seu número. Podem
+                ser aplicadas tarifas padrão de dados e mensagens.{' '}
                 <a href="/" className="text-black underline">
                   Política de Privacidade
                 </a>
               </p>
-              <ButtonPrimary disabled={loading}>{!loading ? 'Cadastrar-se' : 'Aguarde...'}</ButtonPrimary>
+              <ButtonPrimary disabled={loading}>
+                {!loading ? 'Cadastrar-se' : 'Aguarde...'}
+              </ButtonPrimary>
             </form>
             <OauthOptions />
-            <p className='text-sm text-center'>
+            <p className="text-sm text-center">
               Já possui uma conta?{' '}
               <button
-                className='text-rose-500 font-bold'
+                className="text-rose-500 font-bold"
                 onClick={navigateToLoginModal}
               >
                 Faça login

@@ -6,7 +6,12 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   styles?: 'outline' | 'default'
 }
 
-export const ButtonPrimary: React.FC<Props> = ({ children, type, styles = 'default', ...rest }) => {
+export const ButtonPrimary: React.FC<Props> = ({
+  children,
+  type,
+  styles = 'default',
+  ...rest
+}) => {
   if (styles === 'outline') {
     return (
       <button

@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Loading () {
+export default function Loading() {
   return (
     <div>
       <div
-        className='
+        className="
           absolute
           top-1/2
           -translate-y-1/2
@@ -18,7 +18,7 @@ export default function Loading () {
           border-l-pink-500
           animate-spin
           rounded-full
-        '
+        "
       />
     </div>
   )

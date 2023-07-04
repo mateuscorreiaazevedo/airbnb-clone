@@ -1,4 +1,4 @@
-import { create } from "zustand"
+import { create } from 'zustand'
 
 type States = {
   open: boolean
@@ -7,7 +7,6 @@ type States = {
   room: Listing | undefined
 }
 
-
 export const useModalDescription = create<States>(set => ({
   open: false,
   room: undefined,
@@ -15,8 +14,6 @@ export const useModalDescription = create<States>(set => ({
     set({ room })
   },
   setOpen: () => {
-    set(state => ({ open: !state.open}))
+    set(state => ({ open: !state.open }))
   }
 }))
-
-

@@ -11,5 +11,4 @@ export * from './components/footer-fixed'
 export * from './components/empty-state'
 export * from './utils/formatters-helper'
 
-
 export * from './types/children'

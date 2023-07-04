@@ -2,11 +2,11 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { prismaDb } from '@/main/config'
 
-export async function getSession () {
+export async function getSession() {
   return await getServerSession(authOptions)
 }
 
-export async function getLoggedUser () {
+export async function getLoggedUser() {
   try {
     const session = await getSession()
 
@@ -30,7 +30,7 @@ export async function getLoggedUser () {
       ...rest,
       createdAt: rest.createdAt.toISOString(),
       updatedAt: rest.updatedAt.toISOString(),
-      emailVerified: rest.emailVerified?.toISOString() || null,
+      emailVerified: rest.emailVerified?.toISOString() || null
     } as UserInfo
   } catch (error) {
     return null

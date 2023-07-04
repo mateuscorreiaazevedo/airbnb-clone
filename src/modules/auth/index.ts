@@ -7,8 +7,4 @@ const SignOut = React.lazy(() => import('./components/sign-out'))
 export * from './hooks/use-register-modal'
 export * from './hooks/use-login-modal'
 
-export {
-  Login,
-  Register,
-  SignOut
-}
+export { Login, Register, SignOut }

@@ -5,5 +5,4 @@ export interface CategoriesInterface {
   label: string
   icon: LucideIcon
   description: string
-
 }

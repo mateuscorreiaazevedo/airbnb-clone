@@ -15,23 +15,21 @@ export const HeaderApp = async () => {
       </a>
       <SearchBar />
       <div className="flex gap-8">
-        {userAuth
-          ? (
+        {userAuth ? (
           <Link
             href="/hosting"
             className="hidden md:flex md:text-sm lg:text-base items-center justify-center px-6 py-2 h-11 rounded-full font-semibold hover:bg-neutral-50"
           >
             Vou hospedar
           </Link>
-            )
-          : (
+        ) : (
           <Link
             href="/host/homes"
             className="hidden md:flex md:text-sm lg:text-base items-center justify-center px-6 py-2 h-11 rounded-full font-semibold hover:bg-neutral-50"
           >
             Anuncie seu Airbnb
           </Link>
-            )}
+        )}
         <UserMenu userAuth={userAuth} />
       </div>
     </header>

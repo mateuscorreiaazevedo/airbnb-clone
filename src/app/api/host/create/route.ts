@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { prismaDb } from '@/main/config'
 import z from 'zod'
 
-export async function POST (req: Request) {
+export async function POST(req: Request) {
   const body = await req.json()
 
   const bodySchema = z.object({
@@ -64,16 +64,16 @@ export async function POST (req: Request) {
 
   const hosting = await prismaDb?.listing.create({
     data: {
-      bathrooms: value.bathrooms,
-      categoryId: value.categoryId,
-      description: value.description,
-      guests: value.guests,
-      locationValue: value.locationValue,
-      imageUrl: value.imageUrl,
-      price: parseInt(value.price, 10),
-      rooms: value.rooms,
-      title: value.title,
-      userId: authUser.id
+      bathrooms: value.bathrooms!,
+      categoryId: value.categoryId!,
+      description: value.description!,
+      guests: value.guests!,
+      locationValue: value.locationValue!,
+      imageUrl: value.imageUrl!,
+      price: parseFloat(value.price)!,
+      rooms: value.rooms!,
+      title: value.title!,
+      userId: authUser.id!
     }
   })
 

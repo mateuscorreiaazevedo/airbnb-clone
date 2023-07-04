@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation'
 export const OauthOptions = () => {
   const { refresh } = useRouter()
 
-  async function handleSignIn (nameProvider: string) {
+  async function handleSignIn(nameProvider: string) {
     const response = await signIn(nameProvider, {
       redirect: false
     })
@@ -39,7 +39,7 @@ export const OauthOptions = () => {
       </span>
       <div className="flex flex-col items-center gap-4">
         <ButtonPrimary styles="outline" onClick={() => handleSignIn('google')}>
-          <Image src={images.googleIcon} alt='' className='w-8 h-6 ml-4' />
+          <Image src={images.googleIcon} alt="" className="w-8 h-6 ml-4" />
           <span className="flex-1 mr-4">Continuar com Google</span>
         </ButtonPrimary>
       </div>

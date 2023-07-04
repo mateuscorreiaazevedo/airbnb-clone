@@ -11,13 +11,11 @@ const ListingMap = ({ value }: Props) => {
   const [localtion, setLocation] = React.useState<Country | undefined>()
 
   React.useEffect(() => {
-    (() => {
+    ;(() => {
       try {
         const response = countriesHelper.getByValue(value)
         setLocation(response)
-      } catch (error) {
-
-      }
+      } catch (error) {}
     })()
   }, [])
 
@@ -31,9 +29,7 @@ const ListingMap = ({ value }: Props) => {
         <span className="animate-pulse bg-gray-200 rounded-lg w-full h-[45vh]"></span>
       }
     >
-      <Map
-        center={localtion?.latlng}
-      />
+      <Map center={localtion?.latlng} />
     </React.Suspense>
   )
 }

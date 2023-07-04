@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 
 export function rangeDates(startDate: string | Date, endDate: string | Date) {
   const dates = []

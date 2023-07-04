@@ -16,9 +16,7 @@ export function Modal(props: Props) {
     <Dialog.Root open={isOpen} onOpenChange={toggleOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-zinc-900/60 data-[state=open]:animate-overlayShow fixed inset-0" />
-        <Dialog.Content asChild>
-          {children}
-        </Dialog.Content>
+        <Dialog.Content asChild>{children}</Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   )

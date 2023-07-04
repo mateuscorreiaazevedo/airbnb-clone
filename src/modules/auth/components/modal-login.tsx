@@ -1,7 +1,7 @@
 'use client'
 
 // Components
-import { ButtonPrimary, InputField, ListItem, Modal } from '@/main/ui'
+import { ButtonPrimary, InputField, Modal } from '@/main/ui'
 import { OauthOptions } from './oauth-options'
 // Icons
 import { X } from 'lucide-react'
@@ -16,8 +16,7 @@ import { signIn } from 'next-auth/react'
 // React
 import React from 'react'
 
-
-export default function ModalLogin () {
+export default function ModalLogin() {
   const { setOpen: openRegister } = useRegisterModal()
   const [loading, setLoading] = React.useState(false)
   const { setOpen: closePopover } = useUserMenu()
@@ -32,7 +31,7 @@ export default function ModalLogin () {
     closePopover(false)
   }
 
-  async function handleLoginUser ({ email, password }: UserLogin) {
+  async function handleLoginUser({ email, password }: UserLogin) {
     setLoading(true)
     const res = await signIn('credentials', {
       email,
@@ -52,10 +51,7 @@ export default function ModalLogin () {
 
   return (
     <FormProvider {...methods}>
-      <Modal
-        isOpen={open}
-        toggleOpenChange={setOpen}
-      >
+      <Modal isOpen={open} toggleOpenChange={setOpen}>
         <div className="fixed animate-modal w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg">
           <section className="flex w-full items-center px-4 h-16 border-b border-zinc-300">
             <button
@@ -74,11 +70,16 @@ export default function ModalLogin () {
             >
               <fieldset>
                 <InputField label="Email" field="email" roundedTop />
-                <InputField label="Senha" field="password" roundedBotton hasPassword />
+                <InputField
+                  label="Senha"
+                  field="password"
+                  roundedBotton
+                  hasPassword
+                />
               </fieldset>
               <p className="text-zinc-400 text-xs w-field">
-                Ligaremos ou enviaremos uma mensagem para confirmar seu número. Podem ser
-                aplicadas tarifas padrão de dados e mensagens.{' '}
+                Ligaremos ou enviaremos uma mensagem para confirmar seu número. Podem
+                ser aplicadas tarifas padrão de dados e mensagens.{' '}
                 <a href="/" className="text-black underline">
                   Política de Privacidade
                 </a>
@@ -88,10 +89,10 @@ export default function ModalLogin () {
               </ButtonPrimary>
             </form>
             <OauthOptions />
-            <p className='text-sm text-center'>
+            <p className="text-sm text-center">
               Ainda não possui uma conta?{' '}
               <button
-                className='text-rose-500 font-bold'
+                className="text-rose-500 font-bold"
                 onClick={() => {
                   openRegister()
                   setOpen()

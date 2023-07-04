@@ -13,10 +13,7 @@ const ListingModal = () => {
   }
 
   return (
-    <Modal
-      isOpen={open}
-      toggleOpenChange={setOpen}
-    >
+    <Modal isOpen={open} toggleOpenChange={setOpen}>
       <div className="fixed animate-modal w-modal min-h-modal shadow-md border border-zinc-300 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 bg-white rounded-lg">
         <section className="flex w-full items-center px-4 h-16 border-b border-zinc-300">
           <button
@@ -27,9 +24,7 @@ const ListingModal = () => {
           </button>
           <h2 className="flex-1 text-center font-bold text-lg">Descrição</h2>
         </section>
-        <section className="p-8 space-y-4">
-          {room?.description}
-        </section>
+        <section className="p-8 space-y-4">{room?.description}</section>
       </div>
     </Modal>
   )

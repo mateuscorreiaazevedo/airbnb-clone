@@ -13,7 +13,12 @@ interface CounterProps {
   onChange: (value: number) => void
 }
 
-export const InfoCounter: React.FC<CounterProps> = ({ onChange, subtitle, title, value }) => {
+export const InfoCounter: React.FC<CounterProps> = ({
+  onChange,
+  subtitle,
+  title,
+  value
+}) => {
   const handleAddCounter = React.useCallback(() => {
     onChange(value + 1)
   }, [onChange, value])

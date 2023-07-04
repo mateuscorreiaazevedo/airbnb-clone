@@ -29,43 +29,39 @@ export const UserMenu = ({ userAuth, onlyAvatar = false }: Props) => {
       open={open}
       setOpen={setOpen}
       button={
-        onlyAvatar
-          ? (
-            <div>
-              <Avatar userAuth={userAuth} />
-            </div>
-          )
-          : (
-            <div className="cursor-pointer p-2 border border-zinc-300 rounded-full h-11 flex items-center justify-center gap-2 hover:shadow-md transition-colors">
-              <Menu className="w-4 h-4 text-zinc-800" />
-              <Avatar userAuth={userAuth} />
-            </div>
-          )
+        onlyAvatar ? (
+          <div>
+            <Avatar userAuth={userAuth} />
+          </div>
+        ) : (
+          <div className="cursor-pointer p-2 border border-zinc-300 rounded-full h-11 flex items-center justify-center gap-2 hover:shadow-md transition-colors">
+            <Menu className="w-4 h-4 text-zinc-800" />
+            <Avatar userAuth={userAuth} />
+          </div>
+        )
       }
     >
       <nav className="w-full py-2 mt-2 rounded-xl -translate-x-10 bg-white border border-zinc-300 shadow-lg">
         <ul className="flex flex-col">
-          {userAuth
-            ? (
-              <>
-                <ListItem onClick={() => handlePush('/hosting')}>
-                  Minhas propriedades
-                </ListItem>
-                <ListItem onClick={() => handlePush('/trips')}>
-                  Minhas viagens
-                </ListItem>
-                <ListItem onClick={() => handlePush('/my-favorites')}>
-                  Meus favoritos
-                </ListItem>
-                <SignOut />
-              </>
-            )
-            : (
-              <>
-                <ListItem onClick={() => openLogin()} asBold>Entrar</ListItem>
-                <ListItem onClick={() => openRegister()}>Cadastrar-se</ListItem>
-              </>
-            )}
+          {userAuth ? (
+            <>
+              <ListItem onClick={() => handlePush('/hosting')}>
+                Minhas propriedades
+              </ListItem>
+              <ListItem onClick={() => handlePush('/trips')}>Minhas viagens</ListItem>
+              <ListItem onClick={() => handlePush('/my-favorites')}>
+                Meus favoritos
+              </ListItem>
+              <SignOut />
+            </>
+          ) : (
+            <>
+              <ListItem onClick={() => openLogin()} asBold>
+                Entrar
+              </ListItem>
+              <ListItem onClick={() => openRegister()}>Cadastrar-se</ListItem>
+            </>
+          )}
           <div className="w-full h-px bg-zinc-200 my-2" />
           {!userAuth && (
             <ListItem onClick={() => handlePush('/host/homes')}>

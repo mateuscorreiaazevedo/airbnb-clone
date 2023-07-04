@@ -9,9 +9,8 @@ type Props = {
 export const Avatar: React.FC<Props> = ({ userAuth }) => {
   if (userAuth) {
     return (
-      <div className='cursor-pointer'>
-        {userAuth.image
-          ? (
+      <div className="cursor-pointer">
+        {userAuth.image ? (
           <Image
             src={userAuth?.image as string}
             alt=""
@@ -19,12 +18,11 @@ export const Avatar: React.FC<Props> = ({ userAuth }) => {
             width={30}
             height={30}
           />
-            )
-          : (
+        ) : (
           <div className="w-[30px] h-[30px] rounded-full border border-zinc-300 bg-zinc-800 text-white flex items-center justify-center text-xs uppercase">
             {userAuth?.name![0]}
           </div>
-            )}
+        )}
       </div>
     )
   }

@@ -9,7 +9,7 @@ type Props = {
   categoryId: number
 }
 
-export function CategoryInput ({ item, setCategoryId, categoryId }: Props) {
+export function CategoryInput({ item, setCategoryId, categoryId }: Props) {
   return (
     <motion.div
       variants={slideUpItem}

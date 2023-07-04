@@ -1,7 +1,7 @@
 import { service } from '@/modules/core'
 
 class AuthService {
-  async register ({ email, name, password, confirmPassword }: UserRegister) {
+  async register({ email, name, password, confirmPassword }: UserRegister) {
     const response = await service.request<{ message: string; error?: string }>({
       url: '/register',
       data: {

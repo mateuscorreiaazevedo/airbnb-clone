@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { prismaDb } from '@/main/config'
 import { NextResponse } from 'next/server'
 
-export async function POST (req: Request) {
+export async function POST(req: Request) {
   const body = await req.json()
 
   const bodySchema = z.object({
@@ -22,10 +22,16 @@ export async function POST (req: Request) {
   const verifyNumber = /^(?=.*[0-9]).+$/
 
   if (!email.length) {
-    return NextResponse.json({ error: 'Insira um endereço de e-mail.' }, { status: 422 })
+    return NextResponse.json(
+      { error: 'Insira um endereço de e-mail.' },
+      { status: 422 }
+    )
   }
   if (!verifyEmail.test(email)) {
-    return NextResponse.json({ error: 'Endereço de e-mail inválido.' }, { status: 422 })
+    return NextResponse.json(
+      { error: 'Endereço de e-mail inválido.' },
+      { status: 422 }
+    )
   }
   if (!name.length) {
     return NextResponse.json({ error: 'Insira um nome.' }, { status: 422 })
@@ -61,7 +67,10 @@ export async function POST (req: Request) {
     )
   }
   if (password !== confirmPassword) {
-    return NextResponse.json({ error: 'As senhas devem ser iguais.' }, { status: 422 })
+    return NextResponse.json(
+      { error: 'As senhas devem ser iguais.' },
+      { status: 422 }
+    )
   }
   // End - Validations
 
@@ -76,7 +85,10 @@ export async function POST (req: Request) {
   })
 
   if (user) {
-    return NextResponse.json({ error: 'Endereço de e-mail já cadastrado' }, { status: 422 })
+    return NextResponse.json(
+      { error: 'Endereço de e-mail já cadastrado' },
+      { status: 422 }
+    )
   }
 
   await prismaDb?.user.create({
@@ -87,5 +99,8 @@ export async function POST (req: Request) {
     }
   })
 
-  return NextResponse.json({ message: 'Usário cadastrado com sucesso!' }, { status: 201 })
+  return NextResponse.json(
+    { message: 'Usário cadastrado com sucesso!' },
+    { status: 201 }
+  )
 }

@@ -24,7 +24,7 @@ enum STEPS {
   PRICE = 5
 }
 
-export default function BecomeAHost () {
+export default function BecomeAHost() {
   const [step, setStep] = React.useState(STEPS.CATEGORY)
   const [loading, setLoading] = React.useState(false)
   const router = useRouter()
@@ -101,7 +101,10 @@ export default function BecomeAHost () {
         )}
         {step === STEPS.LOCATION && (
           <>
-            <LocationHost value={location} onChange={value => handleValue('location', value)} />
+            <LocationHost
+              value={location}
+              onChange={value => handleValue('location', value)}
+            />
             <FooterFixed>
               <ButtonSecondary onClick={onBackStep} variant="outline" type="button">
                 Voltar

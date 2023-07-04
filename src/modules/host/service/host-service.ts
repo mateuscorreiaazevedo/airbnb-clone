@@ -1,7 +1,7 @@
 import { service } from '@/modules/core'
 
 class HostService {
-  async createHost (data: HostServiceForm) {
+  async createHost(data: HostServiceForm) {
     const response = await service.request<{ error?: string; message: string }>({
       url: '/host/create',
       method: 'post',

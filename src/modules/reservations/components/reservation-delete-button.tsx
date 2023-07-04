@@ -25,11 +25,14 @@ export const ReservationDeleteButton: React.FC<Props> = ({ reservationId }) => {
     } finally {
       setLoading(false)
     }
-
   }
 
   return (
-    <button disabled={loading} onClick={handleDeleteReservation} className='font-semibold text-white bg-rose-500 w-full rounded-lg py-1 hover:bg-rose-500/90 transition-colors disabled:cursor-not-allowed disabled:bg-neutral-600'>
+    <button
+      disabled={loading}
+      onClick={handleDeleteReservation}
+      className="font-semibold text-white bg-rose-500 w-full rounded-lg py-1 hover:bg-rose-500/90 transition-colors disabled:cursor-not-allowed disabled:bg-neutral-600"
+    >
       Cancelar Reserva
     </button>
   )

@@ -5,10 +5,6 @@ export const metadata: Metadata = {
   title: 'Hospede aqui sua propriedade - Airbnb | @mateuscorreiaazevedo'
 }
 
-export default function HostLayout ({ children }: { children: React.ReactNode }) {
-  return (
-    <section>
-      {children}
-    </section>
-  )
+export default function HostLayout({ children }: { children: React.ReactNode }) {
+  return <section>{children}</section>
 }

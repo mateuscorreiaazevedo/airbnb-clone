@@ -13,15 +13,15 @@ export const LocationSelect: React.FC<Props> = ({ onChange, value }) => {
   const getAll = countriesHelper.getAll()
 
   return (
-    <div className='w-full animate-slide-up flex flex-col gap-4'>
+    <div className="w-full animate-slide-up flex flex-col gap-4">
       <Select
-        placeholder='Todos os países'
+        placeholder="Todos os países"
         isClearable
         options={getAll}
         classNames={{
           control: () => 'p-3 border-2',
           input: () => 'text-lg',
-          option: () => 'text-lg',
+          option: () => 'text-lg'
         }}
         theme={theme => ({
           ...theme,
@@ -36,15 +36,14 @@ export const LocationSelect: React.FC<Props> = ({ onChange, value }) => {
         value={value}
         onChange={value => onChange(value as CountrySelectValue)}
         formatOptionLabel={(option: any) => (
-          <div className='flex flex-row items-center gap-3'>
-            <div className='font-semibold'>
+          <div className="flex flex-row items-center gap-3">
+            <div className="font-semibold">
               {option.label},{' '}
-              <span className='font-light text-neutral-400'>{option.region}</span>
+              <span className="font-light text-neutral-400">{option.region}</span>
             </div>
           </div>
         )}
       />
-
     </div>
   )
 }

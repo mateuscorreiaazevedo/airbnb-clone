@@ -11,12 +11,17 @@ type Props = {
 
 export const ImageHost: React.FC<Props> = ({ handleUploadImage, imageUrl }) => {
   return (
-    <motion.div initial='hidden' animate='visible' variants={slideUpContainer} className='w-full h-full'>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={slideUpContainer}
+      className="w-full h-full"
+    >
       <Heading
         title="Adicione uma foto do seu espaço."
         subtitle="Mostre aos convidados como é o seu lugar!"
       />
-      <motion.div variants={slideUpItem} className='w-full h-full'>
+      <motion.div variants={slideUpItem} className="w-full h-full">
         <ImageUpload onChange={handleUploadImage} value={imageUrl} />
       </motion.div>
     </motion.div>
