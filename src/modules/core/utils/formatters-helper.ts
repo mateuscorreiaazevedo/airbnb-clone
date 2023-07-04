@@ -13,6 +13,10 @@ export const formattersHelper = {
     extend: (value: string | Date) => {
       const formattedDate = dayjs(value).format('DD [de] MMM [de] YYYY')
       return formattedDate
-    }
+    },
+    forInputs: (value: string | Date) => {
+      const formattedDate = dayjs(value).format('yyyy-mm-dd')
+      return formattedDate
+    },
   }
 }

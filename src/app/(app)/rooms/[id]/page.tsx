@@ -88,8 +88,8 @@ export default async function Room({ params }: Props) {
               <strong className='text-xl'>
                 {formattersHelper.formatMoney(room.price!)}
               </strong>
-              <span className='ml-2'>
-                noite
+              <span>
+                /noite
               </span>
             </div>
             <ReservationForm authUser={authUser} room={room} />

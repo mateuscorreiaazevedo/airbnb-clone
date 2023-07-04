@@ -1,8 +1,7 @@
 'use client'
 
 import { countriesHelper } from '@/modules/core'
-import dynamic from 'next/dynamic'
-import React from 'react'
+import React, { lazy } from 'react'
 
 type Props = {
   value: string
@@ -23,11 +22,15 @@ const ListingMap = ({ value }: Props) => {
   }, [])
 
   const Map = React.useMemo(() => {
-    return dynamic(() => import('@/modules/core/components/map'), { ssr: false })
+    return lazy(() => import('@/modules/core/components/map'))
   }, [value])
 
   return (
-    <React.Suspense fallback={<>Carregando mapa...</>}>
+    <React.Suspense
+      fallback={
+        <span className="animate-pulse bg-gray-200 rounded-lg w-full h-[45vh]"></span>
+      }
+    >
       <Map
         center={localtion?.latlng}
       />

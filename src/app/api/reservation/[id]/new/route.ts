@@ -1,7 +1,9 @@
 import { prismaDb } from "@/main/config"
+import { rangeDates } from "@/modules/reservations"
 import { getLoggedUser } from "@/modules/user"
 import dayjs from "dayjs"
 import { NextResponse } from "next/server"
+import { root } from "postcss"
 
 interface Props {
   params: {
@@ -19,6 +21,59 @@ export async function POST(req: Request, { params }: Props) {
   if (!authUser) {
     return NextResponse.json({ error: 'Usuário não autenticado.' }, { status: 401 })
   }
+
+  const room = await prismaDb?.listing.findUnique({
+    where: {
+      id: listingId
+    },
+    include: {
+      reservations: true
+    }
+  })
+
+  if (room?.userId === authUser.id) {
+    return NextResponse.json(
+      {
+        error: 'Não é possível realizar uma reserva em seu próprio imóvel.'
+      },
+      {
+        status: 422
+      }
+    )
+  }
+
+
+  // Verify Dates
+  const existingReservationVerify = room?.reservations.map(item => {
+    const startDate = item.startDate.toISOString().split('T')[0]
+    const endDate = item.endDate.toISOString().split('T')[0]
+
+    return rangeDates(startDate, endDate)
+  })[0]
+  const newReservationVerify = rangeDates(checkIn.toString(), checkOut.toString())
+
+  function conflitDates() {
+
+
+    const compareDates = existingReservationVerify?.some(value => {
+      return newReservationVerify.includes(value)
+    })
+
+    return compareDates
+  }
+
+
+  if (conflitDates()) {
+    return NextResponse.json(
+      {
+        error: `As datas de ${existingReservationVerify![0]} à ${existingReservationVerify![existingReservationVerify!.length - 1]} estão reservadas.`
+      },
+      {
+        status: 422
+      }
+    )
+  }
+
 
   const newReservation = await prismaDb?.reservation.create({
     data: {

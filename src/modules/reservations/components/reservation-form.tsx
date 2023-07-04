@@ -1,13 +1,14 @@
 'use client'
 
-import { FormProvider, useForm } from 'react-hook-form'
 import { formattersHelper, setNotification } from '@/modules/core'
+import { reservationService } from '../service/reservation-service'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useMountedClient } from '@/modules/listings'
 import { useLoginModal } from '@/modules/auth'
+import { useRouter } from 'next/navigation'
 import { ButtonPrimary } from '@/main/ui'
 import React from 'react'
 import dayjs from 'dayjs'
-import { reservationService } from '../service/reservation-service'
-import { useRouter } from 'next/navigation'
 
 type Props = {
   authUser: UserInfo | null
@@ -17,14 +18,15 @@ type Props = {
 const PopoverInfo = React.lazy(() => import('./reservation-popover-info'))
 
 export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
+  const { mounted, setMounted } = useMountedClient()
   const { setOpen: setLoginModal } = useLoginModal()
   const router = useRouter()
   const methods = useForm<ReservationForm>({
     defaultValues: {
       guests: 1,
       babies: 0,
-      checkIn: dayjs().toISOString().split('T')[0],
-      checkOut: dayjs().add(1, 'day').toISOString().split('T')[0]
+      checkIn: dayjs().startOf('day').toISOString().split('T')[0],
+      checkOut: dayjs().startOf('day').add(1, 'day').toISOString().split('T')[0]
     }
   })
   const { handleSubmit, register, watch, setValue } = methods
@@ -35,22 +37,26 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
 
   const formattedPrice = formattersHelper.formatMoney(totalPrice)
 
+  const defaultCheckOut = React.useMemo(() => {
+    setValue('checkOut', dayjs(checkIn).add(1, 'day').toISOString().split('T')[0])
+
+    return formattersHelper.formatDate.forInputs(checkOut)
+  }, [checkIn])
+
   React.useEffect(() => {
+    setMounted()
     const startDate = dayjs(checkIn)
     const endDate = dayjs(checkOut)
 
     const rangeDate = endDate.diff(startDate, 'day')
 
-    if (rangeDate < 0) {
-      setNotification('A data de check-out não pode ser anterior a data de check-in', 'error')
-      return
-    }
     if (rangeDate === 0) {
       return
     }
 
     const resultOfRangeDateAndPrice = rangeDate * room.price!
     setValue('totalPrice', resultOfRangeDateAndPrice)
+
 
   }, [totalPrice, checkIn, checkOut])
 
@@ -90,12 +96,12 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
           <div className='flex-1 p-2 flex flex-col'>
             <label htmlFor="checkOut" className='uppercase font-semibold text-zinc-800 text-xs'>Checkout</label>
             <input
+              className='outline-none text-zinc-600 font-semibold'
               type='date'
               id='checkOut'
               {...register('checkOut')}
-              className='outline-none text-zinc-600 font-semibold'
+              defaultValue={defaultCheckOut}
               min={dayjs(checkIn).add(1, 'day').toISOString().split('T')[0]}
-              defaultValue={dayjs(checkIn).add(1, 'day').toISOString().split('T')[0]}
             />
           </div>
         </fieldset>
@@ -109,8 +115,13 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
         </ButtonPrimary>
       </form>
       <p className='flex items-center pt-2 justify-between font-bold'>
-        Total (sem impostos) {totalPrice >= room.price! && <span>{formattedPrice}</span>}
+      Total(sem impostos)
+        {mounted ? (
+          <span className="animate-pulse bg-gray-200 rounded w-20 h-4"></span>
+        ) : (
+          <span>{formattedPrice}</span>
+        )}
       </p>
-    </FormProvider>
+    </FormProvider >
   )
 }

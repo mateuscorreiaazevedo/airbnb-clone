@@ -33,14 +33,17 @@ export const ReservationCard = async (props: Reservation) => {
             <p className='text-neutral-400 font-light'>
               {location?.label}, <span className='font-semibold'>{location?.region}</span>
             </p>
-            <div className='flex gap-2 text-sm text-neutral-400 justify-between font-semibold uppercase'>
+            <div className='flex gap-2 text-neutral-400 justify-between font-semibold uppercase'>
               <span>check-in</span>
               <span>check-out</span>
             </div>
-            <div className='flex gap-2 text-sm text-neutral-400 justify-between'>
+            <div className='flex gap-2 text-neutral-800 justify-between'>
               <span>{checkIn}</span>
               <span>{checkOut}</span>
             </div>
+            <span className='text-neutral-400'>
+              {props.guests} Hóspede(s) {props.babies! > 0 && <>- {props.babies} bebê(s)</>}
+            </span>
           </section>
           <p className='font-semibold'>
             {formattersHelper.formatMoney(props.totalPrice)} <span className='text-neutral-600 text-sm'>(Valor total)</span>
