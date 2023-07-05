@@ -1,6 +1,11 @@
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { prismaDb } from '@/main/config'
+import { Reservation } from '@prisma/client'
+
+type User = UserInfo & {
+  reservations?: Reservation[]
+}
 
 export async function getSession() {
   return await getServerSession(authOptions)
@@ -17,6 +22,9 @@ export async function getLoggedUser() {
     const loggedUser = await prismaDb?.user.findUnique({
       where: {
         email: session?.user?.email as string
+      },
+      include: {
+        reservations: true
       }
     })
 
@@ -31,7 +39,7 @@ export async function getLoggedUser() {
       createdAt: rest.createdAt.toISOString(),
       updatedAt: rest.updatedAt.toISOString(),
       emailVerified: rest.emailVerified?.toISOString() || null
-    } as UserInfo
+    } as User
   } catch (error) {
     return null
   }

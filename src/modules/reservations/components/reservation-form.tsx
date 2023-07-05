@@ -64,7 +64,7 @@ export const ReservationForm: React.FC<Props> = ({ authUser, room }) => {
         const message = await reservationService.newReservation(formData, room.id!)
         setNotification(message, 'success')
         router.refresh()
-        router.push('/')
+        router.push('/trips')
       } catch (error) {
         setNotification((error as any).message, 'error')
       }

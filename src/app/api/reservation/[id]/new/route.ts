@@ -16,6 +16,8 @@ export async function POST(req: Request, { params }: Props) {
   const { id: listingId } = params
 
   const { checkIn, checkOut, guests, totalPrice, babies } = body as ReservationForm
+  const startDate = dayjs(checkIn)
+  const endDate = dayjs(checkOut)
 
   if (!authUser) {
     return NextResponse.json({ error: 'Usuário não autenticado.' }, { status: 401 })
@@ -42,11 +44,13 @@ export async function POST(req: Request, { params }: Props) {
   }
 
   // Verify Dates
+  const verifyReservation = rangeDates(checkIn, checkOut)
+
+  // Verify Dates for Room
   const existingReservation = room?.reservations.flatMap(item =>
     rangeDates(item.startDate, item.endDate)
   )
-  const verifyReservation = rangeDates(checkIn.toString(), checkOut.toString())
-  const hasConflit = existingReservation?.some(value =>
+  const hasConflictByListing = existingReservation?.some(value =>
     verifyReservation.includes(value)
   )
 
@@ -54,10 +58,30 @@ export async function POST(req: Request, { params }: Props) {
   const finalExistingReservation =
     existingReservation![existingReservation!.length - 1]
 
-  if (hasConflit) {
+  if (hasConflictByListing) {
     return NextResponse.json(
       {
         error: `As datas de ${initExistingReservation} à ${finalExistingReservation} estão reservadas.`
+      },
+      {
+        status: 422
+      }
+    )
+  }
+
+  // Verify Dates for User
+  const myReservations = authUser.reservations?.map(item =>
+    rangeDates(item.startDate, item.endDate)
+  )
+
+  const hasConflictByUser = myReservations?.some(items =>
+    verifyReservation.some(item => items.includes(item))
+  )
+
+  if (hasConflictByUser) {
+    return NextResponse.json(
+      {
+        error: 'Você já possui reservas entre as datas escolhidas.'
       },
       {
         status: 422
@@ -69,8 +93,8 @@ export async function POST(req: Request, { params }: Props) {
     data: {
       listingId,
       userId: authUser.id,
-      startDate: dayjs(checkIn).toDate(),
-      endDate: dayjs(checkOut).toDate(),
+      startDate: startDate.toDate(),
+      endDate: endDate.toDate(),
       guests,
       babies: babies as number,
       totalPrice
