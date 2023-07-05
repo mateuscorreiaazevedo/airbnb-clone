@@ -1,27 +1,15 @@
 'use client'
 
-import { countriesHelper } from '@/modules/core'
-import React, { lazy } from 'react'
+import React from 'react'
 
 type Props = {
-  value: string
+  location?: Country
 }
 
-const ListingMap = ({ value }: Props) => {
-  const [localtion, setLocation] = React.useState<Country | undefined>()
-
-  React.useEffect(() => {
-    ;(() => {
-      try {
-        const response = countriesHelper.getByValue(value)
-        setLocation(response)
-      } catch (error) {}
-    })()
-  }, [])
-
+const ListingMap = ({ location }: Props) => {
   const Map = React.useMemo(() => {
-    return lazy(() => import('@/modules/core/components/map'))
-  }, [value])
+    return React.lazy(() => import('@/modules/core/components/map'))
+  }, [location])
 
   return (
     <React.Suspense
@@ -29,7 +17,7 @@ const ListingMap = ({ value }: Props) => {
         <span className="animate-pulse bg-gray-200 rounded-lg w-full h-[45vh]"></span>
       }
     >
-      <Map center={localtion?.latlng} />
+      <Map center={location!.latlng} />
     </React.Suspense>
   )
 }

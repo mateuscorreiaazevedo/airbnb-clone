@@ -105,7 +105,7 @@ export default async function Room({ params }: Props) {
         </section>
         <section className="w-full flex flex-col items-stretch justify-normal gap-4 mb-10">
           <h3 className="text-2xl font-bold">Localização</h3>
-          <ListingMap value={room.locationValue!} />
+          <ListingMap location={location} />
         </section>
       </section>
     </article>
