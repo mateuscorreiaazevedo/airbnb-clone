@@ -14,7 +14,6 @@ export const ListingCard: React.FC<Props> = ({ listing, authUser }) => {
     <div className="relative flex flex-col transition-all items-center w-fit h-fit p-2 rounded-lg hover:bg-neutral-50 justify-center gap-2">
       <Link
         href={`/rooms/${listing.id}`}
-        target="_blank"
         className="flex flex-col items-center justify-center gap-2"
       >
         <Image

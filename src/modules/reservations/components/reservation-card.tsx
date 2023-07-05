@@ -16,7 +16,6 @@ export const ReservationCard = async (props: Reservation) => {
     <div className="flex flex-col transition-all items-center w-fit h-fit p-2 rounded-lg justify-center gap-2">
       <Link
         href={`/rooms/${listing.id}`}
-        target="_blank"
         className="flex flex-col items-center justify-center gap-2"
       >
         <Image
