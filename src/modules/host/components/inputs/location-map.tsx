@@ -4,6 +4,7 @@ import { useCurrentLocation } from '@/modules/core'
 import { ButtonPrimary } from '@/main/ui'
 import { MapPin } from 'lucide-react'
 import React from 'react'
+import dynamic from 'next/dynamic'
 
 type Props = {
   location: CountrySelectValue
@@ -13,7 +14,7 @@ export const LocationMap: React.FC<Props> = ({ location }) => {
   const { currentLocation, setLocation } = useCurrentLocation()
 
   const Map = React.useMemo(
-    () => React.lazy(() => import('@/modules/core/components/map')),
+    () => dynamic(() => import('@/modules/core/components/map'), { ssr: true }),
     [location, currentLocation]
   )
 
