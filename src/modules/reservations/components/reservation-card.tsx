@@ -3,7 +3,9 @@ import { listingService } from '@/modules/listings'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { ReservationDeleteButton } from './reservation-delete-button'
+import { CancelReservationButton } from './cancel-reservation-button'
+import dayjs from 'dayjs'
+import { DeleteReservationButton } from './delete-reservation-button'
 
 export const ReservationCard = async (props: Reservation) => {
   const listing = await listingService.getyById(props.listingId!)
@@ -13,7 +15,7 @@ export const ReservationCard = async (props: Reservation) => {
   const checkOut = formattersHelper.formatDate.extend(props.endDate)
 
   return (
-    <div className="flex flex-col transition-all items-center w-fit h-fit p-2 rounded-lg justify-center gap-2">
+    <div className="relative flex flex-col transition-all items-center w-fit h-fit p-2 rounded-lg justify-center gap-2">
       <Link
         href={`/rooms/${listing.id}`}
         className="flex flex-col items-center justify-center gap-2"
@@ -54,7 +56,17 @@ export const ReservationCard = async (props: Reservation) => {
           </p>
         </article>
       </Link>
-      <ReservationDeleteButton reservationId={props.id} />
+      {dayjs(props.startDate).isBefore(dayjs()) &&
+      dayjs(props.endDate).isAfter(dayjs()) ? (
+        <p className="font-semibold text-neutral-600 text-center bg-neutral-100 w-full rounded-lg py-1">
+          Reserva em andamento
+        </p>
+      ) : (
+        <CancelReservationButton reservationId={props.id} />
+      )}
+      {dayjs().isAfter(props.endDate) && (
+        <DeleteReservationButton reservationId={props.id} />
+      )}
     </div>
   )
 }

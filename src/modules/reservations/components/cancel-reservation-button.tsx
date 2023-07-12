@@ -9,11 +9,11 @@ type Props = {
   reservationId: string
 }
 
-export const ReservationDeleteButton: React.FC<Props> = ({ reservationId }) => {
+export const CancelReservationButton: React.FC<Props> = ({ reservationId }) => {
   const [loading, setLoading] = React.useState(false)
   const router = useRouter()
 
-  const handleDeleteReservation = async () => {
+  const handleCancelReservation = async () => {
     setLoading(true)
 
     try {
@@ -30,7 +30,7 @@ export const ReservationDeleteButton: React.FC<Props> = ({ reservationId }) => {
   return (
     <button
       disabled={loading}
-      onClick={handleDeleteReservation}
+      onClick={handleCancelReservation}
       className="font-semibold text-white bg-rose-500 w-full rounded-lg py-1 hover:bg-rose-500/90 transition-colors disabled:cursor-not-allowed disabled:bg-neutral-600"
     >
       Cancelar Reserva
