@@ -9,6 +9,7 @@
   "workbench.list.openMode": "doubleClick",
   "git.ignoreLimitWarning": true,
   "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
+    "editor.defaultFormatter": "Prisma.prisma",
+    "editor.formatOnSave": true
   }
 }
