@@ -10,9 +10,9 @@ export const HeaderApp = async () => {
 
   return (
     <header className="container sticky top-0 w-full h-20 items-center justify-between flex border-b border-b-zinc-100 bg-white">
-      <a href="/" className="lg:mr-40">
+      <Link href="/" className="lg:mr-40">
         <Image src={images.airbnbLogo} alt="" className="w-[102px] aspect-video" />
-      </a>
+      </Link>
       <SearchBar />
       <div className="flex gap-8">
         {userAuth ? (
